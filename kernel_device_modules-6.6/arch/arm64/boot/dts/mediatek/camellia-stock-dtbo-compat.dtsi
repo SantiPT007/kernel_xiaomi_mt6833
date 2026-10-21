@@ -1,0 +1,25 @@
+// SPDX-License-Identifier: GPL-2.0
+
+mt_pmic_vcamio_ldo_reg: &mt6359p_vcamio_reg {
+};
+
+/ {
+	board_id: board_id {
+		status = "disabled";
+	};
+	irtx_pwm: irtx_pwm {
+		status = "disabled";
+	};
+	mt6360_pmu: mt6360_pmu_dts {
+		status = "disabled";
+	};
+	mt6360_pmic: mt6360_pmic_dts {
+		status = "disabled";
+	};
+	mt6360_ldo: mt6360_ldo_dts {
+		status = "disabled";
+	};
+	tcpc_pd: tcpc_pd {
+		status = "disabled";
+	};
+};
