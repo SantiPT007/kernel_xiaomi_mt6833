@@ -45,7 +45,7 @@
 #define DEFAULT_COMBO0_UISOC MAX_VALUE
 
 #ifndef OPLUS_FEATURE_CHG_BASIC
-#define OPLUS_FEATURE_CHG_BASIC
+/* #define OPLUS_FEATURE_CHG_BASIC */
 #endif
 
 static bool mt_ppb_debug;

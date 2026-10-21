@@ -7,9 +7,7 @@
 #define __MTK_CHARGER_H
 
 #include <linux/alarmtimer.h>
-#ifdef OPLUS_FEATURE_CHG_BASIC
 #include <linux/version.h>
-#endif
 #include "charger_class.h"
 #include "adapter_class.h"
 #include "mtk_charger_algorithm_class.h"
