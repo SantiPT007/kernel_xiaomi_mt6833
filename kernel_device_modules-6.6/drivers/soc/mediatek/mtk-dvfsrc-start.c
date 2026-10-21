@@ -14,6 +14,30 @@
 #define MTK_SIP_DVFSRC_START		0x01
 #define VCOREFS_SMC_CMD_PAUSE_ENABLE	0x21
 
+#define MTK_SIP_LEGACY_SPM_VCOREFS_ARGS	MTK_SIP_SMC_CMD(0x226)
+#define LEGACY_VCOREFS_SMC_CMD_INIT	0
+#define LEGACY_VCOREFS_SMC_CMD_FLAGS	1
+#define LEGACY_VCOREFS_SMC_CMD_FW_STATUS	5
+#define LEGACY_SPM_FLAG_RUN_COMMON_SCENARIO	(1U << 10)
+
+static void mtk_dvfsrc_legacy_start(struct device *dev)
+{
+	struct arm_smccc_res ares;
+
+	arm_smccc_smc(MTK_SIP_LEGACY_SPM_VCOREFS_ARGS, LEGACY_VCOREFS_SMC_CMD_FW_STATUS,
+		0, 0, 0, 0, 0, 0, &ares);
+	if (ares.a0 && ares.a0 != (unsigned long)SMCCC_RET_NOT_SUPPORTED) {
+		dev_info(dev, "legacy ATF: SPM vcorefs firmware already running\n");
+		return;
+	}
+	arm_smccc_smc(MTK_SIP_LEGACY_SPM_VCOREFS_ARGS, LEGACY_VCOREFS_SMC_CMD_INIT,
+		0, 0, 0, 0, 0, 0, &ares);
+	arm_smccc_smc(MTK_SIP_LEGACY_SPM_VCOREFS_ARGS, LEGACY_VCOREFS_SMC_CMD_FLAGS,
+		LEGACY_SPM_FLAG_RUN_COMMON_SCENARIO, 0, 0, 0, 0, 0, &ares);
+	dev_info(dev, "legacy ATF: started DVFSRC via SPM vcorefs (0x226), ret %ld\n",
+		(long)ares.a0);
+}
+
 struct mtk_dvfsrc_start {
 	struct device *dev;
 };
@@ -70,6 +94,8 @@ static int mtk_dvfsrc_start_probe(struct platform_device *pdev)
 	dvfsrc_drv = dvfsrc;
 	arm_smccc_smc(MTK_SIP_VCOREFS_CONTROL, MTK_SIP_DVFSRC_START, 0, 0, 0,
 		0, 0, 0, &ares);
+	if (ares.a0 == (unsigned long)SMCCC_RET_NOT_SUPPORTED)
+		mtk_dvfsrc_legacy_start(&pdev->dev);
 	atomic_notifier_chain_register(&panic_notifier_list, &panic_blk);
 	register_die_notifier(&die_blk);
 
