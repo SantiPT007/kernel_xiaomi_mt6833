@@ -158,3 +158,5 @@ obj-$(CONFIG_OPLUS_FEATURE_FP) += drivers/input/fingerprint/
 endif
 
 obj-m += drivers/misc/camellia_stubs/
+
+obj-m += drivers/misc/camellia_backlight/
