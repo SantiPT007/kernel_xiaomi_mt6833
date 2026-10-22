@@ -678,4 +678,8 @@
 		status = "okay";
 		touch,name = "xiaomi-touch";
 	};
+
+	mt_charger {
+		compatible = "mediatek,mt-charger";
+	};
 };
