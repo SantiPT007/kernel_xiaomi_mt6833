@@ -1624,6 +1624,9 @@ static int ufs_mtk_init(struct ufs_hba *hba)
 	host->hba = hba;
 	ufshcd_set_variant(hba, host);
 
+	if (device_rename(dev, "bootdevice"))
+		dev_info(dev, "%s: rename to bootdevice failed\n", __func__);
+
 	atag = (struct tag_ufs *)ufs_mtk_get_boot_property(dev->of_node,
 			"atag,ufs", NULL);
 	if (!atag)
