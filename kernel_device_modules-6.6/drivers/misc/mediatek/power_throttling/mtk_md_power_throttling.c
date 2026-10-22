@@ -282,6 +282,7 @@ static int __used parse_md_limit_table(struct device *dev)
 			ret = md_limit_default_setting(dev, i);
                         if (ret)
                                 return ret;
+			continue;
 		} else if (num <= 0 || num > priv->max_thl_lv) {
 			priv->max_thl_lv = 0;
 			continue;
