@@ -5628,6 +5628,10 @@ int mtk_layering_rule_ioctl_v419(struct drm_device *dev, void __user *argp)
 	if (!info)
 		return -ENOMEM;
 
+	for (i = 3; i < LYE_CRTC; i++) {
+		info->gles_head[i] = -1;
+		info->gles_tail[i] = -1;
+	}
 	for (i = 0; i < 3; i++) {
 		info->input_config[i] =
 			(struct drm_mtk_layer_config *)old.input_config[i];
