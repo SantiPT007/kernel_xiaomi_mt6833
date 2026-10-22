@@ -44,6 +44,11 @@
 	mt6360pd,intr_gpio = <&pio 9 0x0>;
 	mt6360pd,intr-gpio-num = <9>;
 	mt6360pd,intr-gpio = <&pio 9 0x0>;
+	mt-tcpc,role-def = <5>;
+};
+
+&spi4 {
+	mediatek,pad-select = <0>, <1>;
 };
 
 #ifndef CONFIG_FPGA_EARLY_PORTING
@@ -664,5 +669,13 @@
 		max-brightness = <2047>;
 		max-hw-brightness = <2047>;
 		default-state = "on";
+	};
+};
+
+&{/} {
+	xiaomi_touch {
+		compatible = "xiaomi-touch";
+		status = "okay";
+		touch,name = "xiaomi-touch";
 	};
 };
