@@ -2089,7 +2089,7 @@ int fts_ts_tp_suspend(void)
 	FTS_FUNC_EXIT();
 	return 0;
 }
-EXPORT_SYMBOL(fts_ts_tp_suspend);
+EXPORT_SYMBOL_GPL(fts_ts_tp_suspend);
 
 static int __maybe_unused fts_ts_resume(struct device *dev)
 {
@@ -2167,7 +2167,7 @@ int fts_ts_tp_resume(void)
 	FTS_FUNC_EXIT();
 	return 0;
 }
-EXPORT_SYMBOL(fts_ts_tp_resume);
+EXPORT_SYMBOL_GPL(fts_ts_tp_resume);
 
 #if defined(CONFIG_PM) && FTS_PATCH_COMERR_PM
 static int fts_pm_suspend(struct device *dev)
