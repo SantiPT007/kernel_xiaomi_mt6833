@@ -23,6 +23,7 @@ obj-$(CONFIG_MTK_CHARGER) += mtk_charger_framework.o mtk_pd_charging.o charger_c
 mtk_charger_framework-objs := mtk_charger.o mtk_charger_intf.o mtk_basic_charger.o mtk_pulse_charger.o mtk_adapter_switch.o
 endif
 obj-$(CONFIG_MTK_CHARGER) += camellia_mt_charger.o
+camellia_mt_charger-objs := camellia_mt_charger_psy.o camellia_thermal_message.o
 
 
 mtk_pd_charging-objs := mtk_pd.o mtk_pd_hal.o

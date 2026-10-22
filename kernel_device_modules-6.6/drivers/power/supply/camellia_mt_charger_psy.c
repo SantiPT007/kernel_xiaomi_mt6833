@@ -4,9 +4,22 @@
 #include <linux/of.h>
 #include <linux/platform_device.h>
 #include <linux/power_supply.h>
+#include <linux/thermal.h>
 #include <linux/workqueue.h>
 
+#include "camellia_thermal_message.h"
+
 #define CAMELLIA_CHG_PSY	"primary_chg"
+#define CAMELLIA_MASTER_PSY	"mtk-master-charger"
+#define CAMELLIA_UNLIMIT_CURRENT	0x10000000
+
+static const int camellia_thermal_icl[] = {
+	2000000, 2000000, 2000000, 1600000, 1600000,
+	1600000, 1200000, 1200000, 1000000, 1000000,
+	1000000, 2000000, 2000000, 2000000, 2000000,
+	2000000, 2000000, 2000000, 2000000, 2000000,
+	2000000, 2000000, 0, 0, 0,
+};
 
 struct camellia_mt_charger {
 	struct device *dev;
@@ -15,6 +28,8 @@ struct camellia_mt_charger {
 	struct power_supply *chg;
 	struct notifier_block nb;
 	struct work_struct changed_work;
+	struct thermal_cooling_device *cdev;
+	unsigned long temp_level;
 };
 
 static struct power_supply *camellia_chg_psy(struct camellia_mt_charger *mc)
@@ -118,6 +133,54 @@ static int camellia_mt_psy_notifier(struct notifier_block *nb,
 	return NOTIFY_DONE;
 }
 
+static int camellia_cdev_get_max_state(struct thermal_cooling_device *cdev,
+				       unsigned long *state)
+{
+	*state = ARRAY_SIZE(camellia_thermal_icl) - 1;
+	return 0;
+}
+
+static int camellia_cdev_get_cur_state(struct thermal_cooling_device *cdev,
+				       unsigned long *state)
+{
+	struct camellia_mt_charger *mc = cdev->devdata;
+
+	*state = mc->temp_level;
+	return 0;
+}
+
+static int camellia_cdev_set_cur_state(struct thermal_cooling_device *cdev,
+				       unsigned long state)
+{
+	struct camellia_mt_charger *mc = cdev->devdata;
+	union power_supply_propval val;
+	struct power_supply *master;
+	int ret;
+
+	if (state >= ARRAY_SIZE(camellia_thermal_icl))
+		state = ARRAY_SIZE(camellia_thermal_icl) - 1;
+
+	master = power_supply_get_by_name(CAMELLIA_MASTER_PSY);
+	if (!master)
+		return -ENODEV;
+	val.intval = state ? camellia_thermal_icl[state] : CAMELLIA_UNLIMIT_CURRENT;
+	ret = power_supply_set_property(master, POWER_SUPPLY_PROP_INPUT_CURRENT_LIMIT, &val);
+	power_supply_put(master);
+	if (ret)
+		return ret;
+
+	mc->temp_level = state;
+	dev_info(mc->dev, "system_temp_level:%lu thermal_icl_ua:%d\n", state,
+		 state ? camellia_thermal_icl[state] : -1);
+	return 0;
+}
+
+static const struct thermal_cooling_device_ops camellia_cdev_ops = {
+	.get_max_state = camellia_cdev_get_max_state,
+	.get_cur_state = camellia_cdev_get_cur_state,
+	.set_cur_state = camellia_cdev_set_cur_state,
+};
+
 static int camellia_mt_charger_probe(struct platform_device *pdev)
 {
 	struct power_supply_config cfg = {};
@@ -140,10 +203,20 @@ static int camellia_mt_charger_probe(struct platform_device *pdev)
 	if (IS_ERR(mc->usb))
 		return PTR_ERR(mc->usb);
 
+	mc->cdev = thermal_cooling_device_register("battery", mc, &camellia_cdev_ops);
+	if (IS_ERR(mc->cdev))
+		return PTR_ERR(mc->cdev);
+	ret = camellia_thermal_message_init(mc->cdev);
+	if (ret)
+		dev_warn(&pdev->dev, "thermal_message: %d\n", ret);
+
 	mc->nb.notifier_call = camellia_mt_psy_notifier;
 	ret = power_supply_reg_notifier(&mc->nb);
-	if (ret)
+	if (ret) {
+		camellia_thermal_message_exit();
+		thermal_cooling_device_unregister(mc->cdev);
 		return ret;
+	}
 	schedule_work(&mc->changed_work);
 	return 0;
 }
@@ -153,6 +226,8 @@ static void camellia_mt_charger_remove(struct platform_device *pdev)
 	struct camellia_mt_charger *mc = platform_get_drvdata(pdev);
 
 	power_supply_unreg_notifier(&mc->nb);
+	camellia_thermal_message_exit();
+	thermal_cooling_device_unregister(mc->cdev);
 	cancel_work_sync(&mc->changed_work);
 	if (mc->chg)
 		power_supply_put(mc->chg);
@@ -174,5 +249,5 @@ static struct platform_driver camellia_mt_charger_driver = {
 };
 module_platform_driver(camellia_mt_charger_driver);
 
-MODULE_DESCRIPTION("camellia: 4.14 mt_charger ac/usb power supplies for the stock health HAL");
+MODULE_DESCRIPTION("camellia: 4.14 mt_charger ac/usb supplies, battery cooling device and thermal_message for stock userspace");
 MODULE_LICENSE("GPL");
