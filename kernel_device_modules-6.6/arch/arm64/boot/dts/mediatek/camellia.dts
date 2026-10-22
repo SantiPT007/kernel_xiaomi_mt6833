@@ -642,6 +642,10 @@
 		vsys_watt = <5000000>;
 };
 
+&utos {
+	microtrust,real-drv = <1>;
+};
+
 &mtk_leds {
 	compatible = "mediatek,disp-leds";
 
