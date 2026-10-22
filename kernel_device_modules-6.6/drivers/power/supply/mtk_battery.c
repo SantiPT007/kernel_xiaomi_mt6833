@@ -1392,6 +1392,8 @@ void fg_custom_init_from_header(struct mtk_battery *gm)
 	gm->rbat.rbat_pull_up_volt = RBAT_PULL_UP_VOLT;
 	gm->rbat.bif_ntc_r = BIF_NTC_R;
 
+	if (IS_ENABLED(BAT_NTC_100))
+		gm->rbat.type = 100;
 	if (IS_ENABLED(BAT_NTC_47)) {
 		gm->rbat.type = 47;
 		gm->rbat.rbat_pull_up_r = RBAT_PULL_UP_R;
@@ -3399,7 +3401,7 @@ int battery_init(struct platform_device *pdev)
 	b_recovery_mode = is_recovery_mode(gm);
 	gm->is_probe_done = true;
 
-	if (ret == 0 && b_recovery_mode == 0)
+	if (0 && ret == 0 && b_recovery_mode == 0)
 		bm_err(gm, "[%s]: daemon mode DONE\n", __func__);
 	else {
 		gm->algo.active = true;
