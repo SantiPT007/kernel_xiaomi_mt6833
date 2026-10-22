@@ -135,8 +135,8 @@ int ged_ge_alloc(int region_num, uint32_t *region_sizes)
 		goto err_entry_file;
 	}
 
-	/* Avoid using the unpredictable value for Fuzzing */
-	region_num = GE_ALLOC_STRUCT_NUM;
+	if (region_num <= 0 || region_num > GE_ALLOC_STRUCT_NUM)
+		region_num = GE_ALLOC_STRUCT_NUM;
 
 	entry->region_num = region_num;
 	entry->data =
