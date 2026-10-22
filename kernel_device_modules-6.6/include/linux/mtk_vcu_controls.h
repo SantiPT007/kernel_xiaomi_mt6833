@@ -13,7 +13,7 @@
 #include <linux/string.h>
 #include <linux/compat.h>
 
-#define SHARE_BUF_SIZE 64
+#define SHARE_BUF_SIZE 80
 #define LOG_INFO_SIZE 1024
 #define VCODEC_CMDQ_CMD_MAX           (2048)
 
@@ -197,6 +197,8 @@ enum gce_event_id {
 #define VCU_GET_OBJECT		_IOWR('v', 10, struct share_obj)
 #define VCU_GET_LOG_OBJECT	_IOW('v', 11, struct log_test_nofuse)
 #define VCU_SET_LOG_OBJECT	_IOW('v', 12, struct log_test_nofuse)
+#define VCU_GET_LOG_OBJECT_V419	_IOW('v', 11, char[LOG_INFO_SIZE])
+#define VCU_SET_LOG_OBJECT_V419	_IOW('v', 12, char[LOG_INFO_SIZE])
 #define VCU_SET_MMAP_TYPE	_IOW('v', 13, struct map_obj)
 #define VCU_GET_DISP_MAPPED_IOVA	_IOWR('v', 14, struct disp_iova_obj)
 #define VCU_CLEAR_DISP_MAPPED_IOVA	_IOW('v', 15, struct disp_iova_obj)
