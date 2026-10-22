@@ -677,7 +677,7 @@ static int rt_pd_manager_probe(struct platform_device *pdev)
 		if (!rpmd->tcpc[i]) {
 			dev_notice(rpmd->dev, "%s get %s fail\n",
 					      __func__, name);
-			ret = -ENODEV;
+			ret = -EPROBE_DEFER;
 			goto out;
 		}
 

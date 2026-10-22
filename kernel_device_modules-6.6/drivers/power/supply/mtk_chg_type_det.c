@@ -352,7 +352,7 @@ skip_get_psy:
 		mci->tcpc[i] = tcpc_dev_get_by_name(name);
 		if (!mci->tcpc[i]) {
 			dev_notice(mci->dev, "Failed to get %s\n", name);
-			ret = -ENODEV;
+			ret = -EPROBE_DEFER;
 			goto out;
 		}
 
