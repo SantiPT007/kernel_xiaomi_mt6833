@@ -59,7 +59,6 @@ static struct mmc_host *mtk_mmc_host[] = {NULL};
 
 /* #define __RPMB_MTK_DEBUG_MSG */
 /* #define __RPMB_MTK_DEBUG_HMAC_VERIFY */
-#define __RPMB_KERNEL_NL_SUPPORT
 #define __RPMB_IOCTL_SUPPORT
 
 /* TEE usage */
