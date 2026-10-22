@@ -7404,6 +7404,10 @@ grpid = <11>;
 &hypervisor {
 	status = "disabled";
 };
+
+&apuart0 {
+	status = "disabled";
+};
 #include "mediatek/cust_mt6833_thermal.dtsi"
 
 //#ifdef OPLUS_FEATURE_SECURITY_COMMON
