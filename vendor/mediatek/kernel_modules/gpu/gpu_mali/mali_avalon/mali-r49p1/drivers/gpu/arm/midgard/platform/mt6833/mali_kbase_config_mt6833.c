@@ -554,3 +554,5 @@ void mtk_platform_pm_term(struct kbase_device *kbdev)
     if (IS_ERR_OR_NULL(kbdev))
         return;
 }
+
+MODULE_SOFTDEP("pre: mtk_gpufreq_mt6833");

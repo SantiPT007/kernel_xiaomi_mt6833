@@ -22,4 +22,14 @@ mt_pmic_vcamio_ldo_reg: &mt6359p_vcamio_reg {
 	tcpc_pd: tcpc_pd {
 		status = "disabled";
 	};
+
+	stock_dtbo_i2c5_sink: stock-dtbo-i2c5-sink {
+		#address-cells = <1>;
+		#size-cells = <0>;
+		status = "disabled";
+	};
+
+	__symbols__ {
+		i2c5 = "/stock-dtbo-i2c5-sink";
+	};
 };
