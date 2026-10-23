@@ -967,6 +967,10 @@ static void disp_ccorr_get_property_value(struct mtk_ddp_comp *comp, struct devi
 	ret = of_property_read_u32(node, "ccorr-linear", &(ccorr_data->is_linear));
 	if (ret)
 		DDPPR_ERR("read ccorr-linear failed\n");
+
+	if (of_property_read_u32(node, "ccorr-linear-per-pipe",
+			&primary_data->disp_ccorr_caps.ccorr_linear))
+		primary_data->disp_ccorr_caps.ccorr_linear = ccorr_data->is_linear ? 0x01 : 0;
 	DDPINFO("%s(%s):ccorr_bit:%d,ccorr_number:%d, is_linear: %d\n",
 		__func__, mtk_dump_comp_str(comp), primary_data->disp_ccorr_caps.ccorr_bit,
 		primary_data->disp_ccorr_caps.ccorr_number, ccorr_data->is_linear);
