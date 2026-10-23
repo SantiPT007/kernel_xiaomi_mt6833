@@ -160,6 +160,7 @@ endif
 obj-m += drivers/misc/camellia_stubs/
 
 obj-m += drivers/misc/camellia_ion/
+obj-m += drivers/misc/camellia_cpumaxfreq/
 
 obj-m += drivers/misc/camellia_backlight/
 
