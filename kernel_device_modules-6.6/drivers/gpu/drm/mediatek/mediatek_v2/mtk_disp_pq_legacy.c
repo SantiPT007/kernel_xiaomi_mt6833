@@ -55,6 +55,9 @@ int mtk_drm_legacy_pq_persist_property(struct drm_device *dev, void *data,
 int mtk_drm_legacy_set_ccorr(struct drm_device *dev, void *data,
 	struct drm_file *file_priv)
 {
+	struct DRM_DISP_CCORR_COEF_T *coef = data;
+
+	coef->linear = 1;
 	return legacy_config(dev, MTK_DISP_PQ_CCORR, PQ_CCORR_SET_CCORR, data,
 			     sizeof(struct DRM_DISP_CCORR_COEF_T), 1);
 }
