@@ -43,6 +43,7 @@ struct led_conf_info {
 	struct kernfs_node	*brightness_hw_changed_kn;
 #endif
 	enum mtk_leds_types led_type;
+	unsigned int brightness_clone;
 };
 
 #ifdef CONFIG_LEDS_MT_BRIGHTNESS_HW_CHANGED
