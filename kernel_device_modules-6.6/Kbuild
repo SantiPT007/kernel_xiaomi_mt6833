@@ -159,6 +159,8 @@ endif
 
 obj-m += drivers/misc/camellia_stubs/
 
+obj-m += drivers/misc/camellia_ion/
+
 obj-m += drivers/misc/camellia_backlight/
 
 obj-m += drivers/input/touchscreen/camellia_xiaomi_touch/
