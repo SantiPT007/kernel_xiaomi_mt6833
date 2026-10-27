@@ -254,6 +254,17 @@ void emi_mem_uninit(struct mt66xx_chip_info *chip, void *dev)
 #endif
 }
 
+static void emi_mem_late_init(struct mt66xx_chip_info *chip)
+{
+#if CFG_MTK_ANDROID_WMT && CFG_SUPPORT_CONNAC1X
+	struct EMI_MEM_INFO *emi = &chip->rEmiInfo;
+
+	if (!emi->initialized && emi->type == EMI_ALLOC_TYPE_WMT &&
+	    gConEmiPhyBase)
+		emi_mem_init(chip, NULL);
+#endif
+}
+
 static u_int8_t __emi_mem_sanity_chk(struct mt66xx_chip_info *chip,
 	uint32_t offset, void *buf, uint32_t size)
 {
@@ -273,6 +284,7 @@ int32_t emi_mem_write(struct mt66xx_chip_info *chip,
 	struct EMI_MEM_INFO *emi = NULL;
 
 	emi = &chip->rEmiInfo;
+	emi_mem_late_init(chip);
 
 	if (!emi->initialized)
 		return -EINVAL;
@@ -305,6 +317,7 @@ int32_t emi_mem_read(struct mt66xx_chip_info *chip,
 	struct EMI_MEM_INFO *emi = NULL;
 
 	emi = &chip->rEmiInfo;
+	emi_mem_late_init(chip);
 
 	if (!emi->initialized)
 		return -EINVAL;
@@ -336,6 +349,7 @@ void *emi_mem_get_vir_base(struct mt66xx_chip_info *chip)
 	struct EMI_MEM_INFO *emi = NULL;
 
 	emi = &chip->rEmiInfo;
+	emi_mem_late_init(chip);
 
 	if (!emi->initialized)
 		return NULL;
@@ -348,6 +362,7 @@ phys_addr_t emi_mem_get_phy_base(struct mt66xx_chip_info *chip)
 	struct EMI_MEM_INFO *emi = NULL;
 
 	emi = &chip->rEmiInfo;
+	emi_mem_late_init(chip);
 
 	if (!emi->initialized)
 		return 0;
@@ -360,6 +375,7 @@ uint32_t emi_mem_get_size(struct mt66xx_chip_info *chip)
 	struct EMI_MEM_INFO *emi = NULL;
 
 	emi = &chip->rEmiInfo;
+	emi_mem_late_init(chip);
 
 	if (!emi->initialized)
 		return 0;
