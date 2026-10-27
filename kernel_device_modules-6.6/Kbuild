@@ -161,6 +161,7 @@ obj-m += drivers/misc/camellia_stubs/
 
 obj-m += drivers/misc/camellia_ion/
 obj-m += drivers/misc/camellia_cpumaxfreq/
+obj-m += sound/soc/mediatek/camellia_fs1815/
 
 obj-m += drivers/misc/camellia_backlight/
 

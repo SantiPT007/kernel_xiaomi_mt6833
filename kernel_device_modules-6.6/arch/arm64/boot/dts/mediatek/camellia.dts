@@ -480,6 +480,10 @@
 };
 /* end modify*/
 
+&speaker_amp {
+	status = "disabled";
+};
+
 /* BSP.Audio - 2020.11.11 - modify to bring up second PA */
 &i2c6 {
 	fs16xx@34 {
