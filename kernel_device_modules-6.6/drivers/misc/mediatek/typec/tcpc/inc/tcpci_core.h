@@ -275,6 +275,7 @@ struct tcpc_device {
 	struct tcpc_desc desc;
 	struct device dev;
 	uint8_t wake_lock_pd;
+	bool irq_enabled;
 	struct wakeup_source *attach_wake_lock;
 	struct wakeup_source *detach_wake_lock;
 

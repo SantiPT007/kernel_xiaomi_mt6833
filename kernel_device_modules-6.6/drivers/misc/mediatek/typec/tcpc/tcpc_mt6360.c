@@ -2249,6 +2249,9 @@ static int mt6360_i2c_probe(struct i2c_client *client)
 		goto err_init_alert;
 	}
 
+	if (tcpc_late_sync_done)
+		tcpc_device_irq_enable(chip->tcpc);
+
 	dev_info(chip->dev, "%s successfully!\n", __func__);
 	return 0;
 
