@@ -3834,6 +3834,8 @@
 
 		core-0 = "enable";
 		scp-sram-size = <0x000c0000>;
+		core_0 = "enable";
+		scp_sramSize = <0x000c0000>;
 		core-nums = <1>;	/* core number */
 		twohart = <1>;		/* two hart arch */
 
@@ -3964,7 +3966,7 @@
 
 	scp_dvfs {
 		compatible = "mediatek,scp-dvfs";
-		scp-dvfs-disable = <0>; /* 0: enable, 1: disable */
+		scp-dvfs-disable = <1>; /* 0: enable, 1: disable */
 		clocks =
 			<&topckgen_clk CLK_TOP_SCP_SEL>,
 			<&topckgen_clk CLK_TOP_TCK_26M_MX9>,
