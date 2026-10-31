@@ -347,6 +347,8 @@ static enum cion_dom cion_port_dom(int module_id)
 	case 18:
 	case 19:
 	case 20:
+	case 22:
+	case 23:
 		return CION_MDP;
 	case 0:
 	case 1:
