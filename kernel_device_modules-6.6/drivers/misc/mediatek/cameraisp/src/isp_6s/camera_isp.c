@@ -5711,6 +5711,10 @@ static long ISP_ioctl(struct file *pFile, unsigned int Cmd, unsigned long Param)
 			Ret = -EFAULT;
 		}
 	} break;
+	case ISP_ION_IMPORT:
+	case ISP_ION_FREE:
+	case ISP_ION_FREE_BY_HWMODULE:
+		break;
 	default: {
 		LOG_NOTICE("Unknown Cmd(%d)\n", Cmd);
 		Ret = -EPERM;
