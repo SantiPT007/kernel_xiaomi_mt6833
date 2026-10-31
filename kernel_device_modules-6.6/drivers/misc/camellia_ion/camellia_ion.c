@@ -319,7 +319,7 @@ struct cion_client {
 	char name[ION_MM_DBG_NAME_LEN];
 };
 
-enum cion_dom { CION_VDEC, CION_VENC, CION_MDP, CION_DISP, CION_NR_DOM };
+enum cion_dom { CION_VDEC, CION_VENC, CION_MDP, CION_DISP, CION_CCU, CION_NR_DOM };
 
 struct cion_handle {
 	struct dma_buf *buf;
@@ -347,9 +347,10 @@ static enum cion_dom cion_port_dom(int module_id)
 	case 18:
 	case 19:
 	case 20:
+		return CION_MDP;
 	case 22:
 	case 23:
-		return CION_MDP;
+		return CION_CCU;
 	case 0:
 	case 1:
 		return CION_DISP;
@@ -365,6 +366,7 @@ static struct device *cion_dom_device(enum cion_dom dom)
 		[CION_VENC] = "mediatek,mt6833-vcodec-enc",
 		[CION_MDP] = "mediatek,mdpsys_config",
 		[CION_DISP] = "mediatek,mt6833-disp",
+		[CION_CCU] = "mediatek,ccu",
 	};
 	struct device_node *np;
 	struct platform_device *pdev;
