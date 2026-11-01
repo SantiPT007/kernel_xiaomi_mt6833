@@ -4427,6 +4427,8 @@ static int fdvt_add_device_link(struct platform_device *pDev)
 /*****************************************************************************
  *
  *****************************************************************************/
+static const struct of_device_id FDVT_of_ids[];
+
 static signed int FDVT_probe(struct platform_device *pDev)
 {
 	signed int ret = 0;
@@ -4452,6 +4454,9 @@ static signed int FDVT_probe(struct platform_device *pDev)
 		log_inf("pDev is NULL");
 		return -ENXIO;
 	}
+
+	if (of_match_node(FDVT_of_ids, pDev->dev.of_node) - FDVT_of_ids != nr_fdvt_devs)
+		return -EPROBE_DEFER;
 
 	nr_fdvt_devs += 1;
 	_fdvt_dev = krealloc(fdvt_devs, sizeof(struct fdvt_device) *

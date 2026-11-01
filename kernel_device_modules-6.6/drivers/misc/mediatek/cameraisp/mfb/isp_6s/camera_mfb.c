@@ -4270,6 +4270,8 @@ static void MFB_add_device_link(struct platform_device *pDev)
 /******************************************************************************
  *
  ******************************************************************************/
+static const struct of_device_id MFB_of_ids[];
+
 static signed int MFB_probe(struct platform_device *pDev)
 {
 	signed int Ret = 0;
@@ -4300,6 +4302,9 @@ static signed int MFB_probe(struct platform_device *pDev)
 		dev_dbg(&pDev->dev, "pDev is NULL");
 		return -ENXIO;
 	}
+
+	if (of_match_node(MFB_of_ids, pDev->dev.of_node) - MFB_of_ids != nr_MFB_devs)
+		return -EPROBE_DEFER;
 
 	nr_MFB_devs += 1;
 	_mfb_dev = krealloc(MFB_devs,
