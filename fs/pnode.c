@@ -442,6 +442,27 @@ int propagate_mount_busy(struct mount *mnt, int refcnt)
 	return 0;
 }
 
+void propagate_mnt_idmap(struct mount *mnt)
+{
+	struct mount *parent = mnt->mnt_parent;
+	struct mnt_idmap *idmap = mnt_idmap(&mnt->mnt);
+	struct mount *m, *child;
+
+	if (parent == mnt)
+		return;
+	for (m = propagation_next(parent, parent); m; m = propagation_next(m, parent)) {
+		struct mnt_idmap *old;
+
+		child = __lookup_mnt(&m->mnt, mnt->mnt_mountpoint);
+		if (!child || child == mnt || child->mnt.mnt_sb != mnt->mnt.mnt_sb ||
+		    child->mnt.mnt_root != mnt->mnt.mnt_root)
+			continue;
+		old = mnt_idmap(&child->mnt);
+		smp_store_release(&child->mnt.mnt_idmap, mnt_idmap_get(idmap));
+		mnt_idmap_put(old);
+	}
+}
+
 /*
  * Clear MNT_LOCKED when it can be shown to be safe.
  *
