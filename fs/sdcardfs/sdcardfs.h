@@ -122,6 +122,8 @@ typedef enum {
 
 struct sdcardfs_sb_info;
 struct sdcardfs_mount_options;
+extern int sdcardfs_on_fscrypt_key_removed(struct notifier_block *nb,
+					   unsigned long action, void *data);
 struct sdcardfs_inode_info;
 struct sdcardfs_inode_data;
 
@@ -230,6 +232,7 @@ struct sdcardfs_sb_info {
 		struct sdcardfs_vfsmount_options opts;
 	} views[SDCARDFS_MAX_VIEWS];
 	int nr_views;
+	struct notifier_block fscrypt_nb;
 	spinlock_t lock;	/* protects obbpath */
 	char *obbpath_s;
 	struct path obbpath;

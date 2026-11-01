@@ -2083,6 +2083,7 @@ struct super_operations {
 				    struct shrink_control *);
 	void (*shutdown)(struct super_block *sb);
 	int (*remount_mnt)(struct vfsmount *mnt, char *data);
+	int (*show_mnt_options)(struct seq_file *, struct vfsmount *);
 };
 
 /*
