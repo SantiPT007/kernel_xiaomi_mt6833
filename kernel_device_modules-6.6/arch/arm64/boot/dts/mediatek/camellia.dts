@@ -729,3 +729,7 @@
 &cam1_vcama {
 	status = "disabled";
 };
+
+&gce_mbox_bdg {
+	status = "disabled";
+};
