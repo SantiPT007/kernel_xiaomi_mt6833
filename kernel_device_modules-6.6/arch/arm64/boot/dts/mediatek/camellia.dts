@@ -502,6 +502,7 @@
 
 &charger {
 	camellia,sw-jeita-6band;
+	camellia,ignore-atm;
 	algorithm_name = "Basic";
 		/* BSP.Charge - 2020.12.02 - Eanble sw_jeita */
 		enable_sw_jeita;
