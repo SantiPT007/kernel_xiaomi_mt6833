@@ -3966,7 +3966,7 @@
 
 	scp_dvfs {
 		compatible = "mediatek,scp-dvfs";
-		scp-dvfs-disable = <1>; /* 0: enable, 1: disable */
+		scp-dvfs-disable = <0>; /* 0: enable, 1: disable */
 		clocks =
 			<&topckgen_clk CLK_TOP_SCP_SEL>,
 			<&topckgen_clk CLK_TOP_TCK_26M_MX9>,
@@ -4030,7 +4030,7 @@
 			<0x5ea940	0x2900		0x41>;
 		clk-dbg-ver = "v1";
 		ccf-fmeter-support;
-		secure_access = "enable"; /* enable: need to secure access scp */
+		secure_access = "disable"; /* enable: need to secure access scp */
 		legacy-support-v1;
 		scp-dvfs-flag = "enable"; /* enable/disable */
 
