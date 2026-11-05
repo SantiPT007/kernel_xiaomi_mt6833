@@ -727,3 +727,7 @@
 		status = "okay";
 	};
 };
+
+&cam1_vcama {
+	status = "disabled";
+};
