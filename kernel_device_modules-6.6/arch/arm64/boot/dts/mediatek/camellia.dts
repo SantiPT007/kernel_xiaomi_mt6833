@@ -392,14 +392,12 @@
 	};
 }; /* IRTX GPIO Settings -End */
 
-#if 0
 &irtx_pwm {
 	pinctrl-names = "irtx_gpio_led_default", "irtx_gpio_led_set";
 	pinctrl-0 = <&irtx_gpio_led_default>;
 	pinctrl-1 = <&irtx_gpio_led_set>;
 	status = "okay";
 };
-#endif
 
 &gps {
 	pinctrl-names = "default",
