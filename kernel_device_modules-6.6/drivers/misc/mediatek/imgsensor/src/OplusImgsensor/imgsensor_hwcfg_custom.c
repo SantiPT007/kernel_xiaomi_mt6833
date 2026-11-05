@@ -97,6 +97,11 @@ struct IMGSENSOR_HW_POWER_SEQ *Oplusimgsensor_matchhwcfg_power(
         return NULL;
     }
 
+    if (pwr_actidx == IMGSENSOR_POWER_MATCHMIPI_HWCFG_INDEX &&
+        oplus_platform_power_sequence == platform_power_sequence) {
+        return oplus_platform_power_sequence;
+    }
+
 
         if (pwr_actidx == IMGSENSOR_POWER_MATCHSENSOR_HWCFG_INDEX) {
             ppwr_seq = oplus_sensor_power_sequence;
