@@ -83,5 +83,5 @@ void oplus_chg_set_camera_status(bool val)
 }
 EXPORT_SYMBOL(oplus_chg_set_camera_status);
 
-MODULE_DESCRIPTION("camellia: neutral stubs for unpublished Oppo helper symbols");
+MODULE_DESCRIPTION("camellia: neutral stubs for vendor helper symbols");
 MODULE_LICENSE("GPL");
