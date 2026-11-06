@@ -892,9 +892,7 @@ void fgr_update_uisoc_threshold(struct mtk_battery *gm)
 
 	/* calculate ui lt_gap */
 	D_Remain = algo->soc * algo->quse_tb1 / 10000;
-	algo->lt_gap =
-		D_Remain * gm->fg_cust_data.diff_soc_setting
-		/ algo->ui_soc;
+	algo->lt_gap = D_Remain * UNIT_TRANS_100 / algo->ui_soc;
 
 	if (algo->lt_gap < (algo->quse_tb1 / 1000))
 		algo->lt_gap = algo->quse_tb1 / 1000;
