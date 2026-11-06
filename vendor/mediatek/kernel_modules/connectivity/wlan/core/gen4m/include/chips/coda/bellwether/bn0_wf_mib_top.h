@@ -355,31 +355,9 @@ extern "C" {
 #define BN0_WF_MIB_TOP_M0SCR0_CHANNEL_IDLE_COUNT_EN_MASK       0x00000008                // CHANNEL_IDLE_COUNT_EN[3]
 #define BN0_WF_MIB_TOP_M0SCR0_CHANNEL_IDLE_COUNT_EN_SHFT       3
 
-/* =====================================================================================
 
-  ---M0SCR1 (0x820ed000 + 0x004)---
 
-    RESERVED0[3..0]              - (RO) Reserved bits
-    MAC2PHY_TIME_EN[4]           - (RW) Enable MAC2PHY TX/idle time count
-    RESERVED5[7..5]              - (RO) Reserved bits
-    TXDUR_EN[8]                  - (RW) Enable TXDUR count
-    RXDUR_EN[9]                  - (RW) Enable RXDUR count
-    RESERVED10[13..10]           - (RO) Reserved bits
-    TXOP_STATUS_COUNT_EN[14]     - (RW) Enable TXOP Status Counters
-    EIFS_SLOT_COUNT_EN[15]       - (RW) Enable EIFS SLOT Counters
-    NON_ED_EN[16]                - (RW) Invert the primary ED source
-    RESERVED17[18..17]           - (RO) Reserved bits
-    MOZART_ED_TRIG_COUNT_EN[19]  - (RW) Enable Energy detection trigger counter
-    TX_TIME_COUNT_EN[20]         - (RW) Enable transmission time counter
-    OPPO_PS_RX_DIS_COUNT_EN[21]  - (RW) Enable OPPO power save counter
-    OPPO_PS_RX_DIS_TIME_COUNT_EN[22] - (RW) Enable OPPO power save time counter
-    OPPO_SX_OFF_COUNT_EN[23]     - (RW) Enable SX power off counter
-    RESERVED24[26..24]           - (RO) Reserved bits
-    EIFS_OFDM_COUNT_EN[27]       - (RW) Enable EIFS OFDM Counters
-    EIFS_CCK_COUNT_EN[28]        - (RW) Enable EIFS CCK Counters
-    RESERVED29[31..29]           - (RO) Reserved bits
 
- =====================================================================================*/
 #define BN0_WF_MIB_TOP_M0SCR1_EIFS_CCK_COUNT_EN_ADDR           BN0_WF_MIB_TOP_M0SCR1_ADDR
 #define BN0_WF_MIB_TOP_M0SCR1_EIFS_CCK_COUNT_EN_MASK           0x10000000                // EIFS_CCK_COUNT_EN[28]
 #define BN0_WF_MIB_TOP_M0SCR1_EIFS_CCK_COUNT_EN_SHFT           28

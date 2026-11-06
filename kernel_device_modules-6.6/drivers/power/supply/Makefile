@@ -2,11 +2,7 @@
 subdir-ccflags-$(CONFIG_POWER_SUPPLY_DEBUG) := -DDEBUG
 subdir-ccflags-y += -I$(DEVICE_MODULES_PATH)/drivers/misc/mediatek/usb/usb20/
 
-ifeq ($(CONFIG_OPLUS_PD_EXT_SUPPORT),)
 subdir-ccflags-y += -I$(DEVICE_MODULES_PATH)/drivers/misc/mediatek/typec/tcpc/inc
-else
-subdir-ccflags-y += -I$(srctree)/drivers/power/oplus/pd_ext/inc
-endif
 subdir-ccflags-y += -I$(DEVICE_MODULES_PATH)/drivers/misc/mediatek/power_throttling
 subdir-ccflags-y += -I$(DEVICE_MODULES_PATH)/drivers/misc/mediatek/include
 subdir-ccflags-y += -I$(DEVICE_MODULES_PATH)/drivers/power/supply/ufcs
