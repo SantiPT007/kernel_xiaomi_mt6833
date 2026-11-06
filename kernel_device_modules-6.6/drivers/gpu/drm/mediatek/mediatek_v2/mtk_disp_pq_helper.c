@@ -516,6 +516,7 @@ int disp_pq_proxy_virtual_type_impl(struct drm_crtc *crtc, struct drm_device *de
 	return ret;
 }
 
+#if 0
 bool disp_pq_is_cmd_need_pm(enum mtk_pq_frame_cfg_cmd cmd)
 {
 	bool ret = true;
@@ -545,6 +546,7 @@ bool disp_pq_is_cmd_need_pm(enum mtk_pq_frame_cfg_cmd cmd)
 	}
 	return ret;
 }
+#endif
 
 int disp_pq_proxy_kdata(struct drm_device *dev, struct drm_file *file_priv,
 	struct drm_crtc *crtc, unsigned int pq_cmd, void *kdata, unsigned int size)

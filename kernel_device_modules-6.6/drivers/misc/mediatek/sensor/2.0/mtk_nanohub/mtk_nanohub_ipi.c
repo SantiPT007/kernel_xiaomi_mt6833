@@ -191,20 +191,24 @@ static int ipi_sync(const unsigned char *txbuf, unsigned int n_tx,
 	return __ipi_xfer(&m);
 }
 
+#if 0
 static int ipi_async(struct ipi_message *m)
 {
 	return __ipi_transfer(m);
 }
+#endif
 
 int mtk_nanohub_ipi_sync(unsigned char *buffer, unsigned int len)
 {
 	return ipi_sync(buffer, len, buffer, len);
 }
 
+#if 0
 int mtk_nanohub_ipi_async(struct ipi_message *m)
 {
 	return ipi_async(m);
 }
+#endif
 
 void mtk_nanohub_ipi_complete(unsigned char *buffer, unsigned int len)
 {

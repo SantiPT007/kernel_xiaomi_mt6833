@@ -465,10 +465,12 @@ static unsigned long get_tx_bytes(unsigned long pre_tx_bytes)
 	return tx_bytes;
 }
 
+#if 0
 int tswmt_get_WiFi_tx_tput(void)
 {
 	return tx_throughput;
 }
+#endif
 static void wmt_cal_stats(struct timer_list *t)
 {
 	struct wmt_stats *stats_info = &wmt_stats_info;

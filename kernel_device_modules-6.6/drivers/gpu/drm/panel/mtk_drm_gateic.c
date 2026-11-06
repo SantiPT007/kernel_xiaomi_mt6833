@@ -166,11 +166,13 @@ int mtk_drm_gateic_select(const char *lcm_name, char func)
 }
 EXPORT_SYMBOL(mtk_drm_gateic_select);
 
+#if 0
 struct mtk_gateic_funcs *mtk_drm_gateic_get(char func)
 {
 	return mtk_drm_gateic_get_ops(func);
 }
 EXPORT_SYMBOL(mtk_drm_gateic_get);
+#endif
 
 int mtk_drm_gateic_power_on(char func)
 {
@@ -249,6 +251,7 @@ int mtk_drm_gateic_set_backlight(unsigned int level,
 }
 EXPORT_SYMBOL(mtk_drm_gateic_set_backlight);
 
+#if 0
 int mtk_drm_gateic_enable_backlight(char func)
 {
 #ifndef CONFIG_FPGA_EARLY_PORTING
@@ -263,7 +266,9 @@ int mtk_drm_gateic_enable_backlight(char func)
 #endif
 }
 EXPORT_SYMBOL(mtk_drm_gateic_enable_backlight);
+#endif
 
+#if 0
 int mtk_drm_gateic_write_bytes(unsigned char addr, unsigned char value, char func)
 {
 #ifndef CONFIG_FPGA_EARLY_PORTING
@@ -272,7 +277,9 @@ int mtk_drm_gateic_write_bytes(unsigned char addr, unsigned char value, char fun
 	return 0;
 #endif
 }
+#endif
 
+#if 0
 int mtk_drm_gateic_read_bytes(unsigned char addr, unsigned char *value, char func)
 {
 #ifndef CONFIG_FPGA_EARLY_PORTING
@@ -281,7 +288,9 @@ int mtk_drm_gateic_read_bytes(unsigned char addr, unsigned char *value, char fun
 	return 0;
 #endif
 }
+#endif
 
+#if 0
 int mtk_drm_gateic_write_multiple_bytes(unsigned char addr,
 		 unsigned char *value, unsigned int size, char func)
 {
@@ -291,6 +300,7 @@ int mtk_drm_gateic_write_multiple_bytes(unsigned char addr,
 	return 0;
 #endif
 }
+#endif
 
 static struct platform_driver *const mtk_drm_gateic_drivers[] = {
 	&mtk_gateic_rt4801h_driver,

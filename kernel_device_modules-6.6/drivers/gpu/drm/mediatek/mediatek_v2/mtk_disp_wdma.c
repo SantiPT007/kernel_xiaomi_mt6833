@@ -2254,6 +2254,7 @@ int mtk_wdma_analysis(struct mtk_ddp_comp *comp)
 	return 0;
 }
 
+#if 0
 int MMPathTraceWDMA(struct mtk_ddp_comp *ddp_comp, char *str,
 	unsigned int strlen, unsigned int n)
 {
@@ -2270,6 +2271,7 @@ int MMPathTraceWDMA(struct mtk_ddp_comp *ddp_comp, char *str,
 
 	return n;
 }
+#endif
 
 struct mtk_ddp_comp *mtk_disp_get_wdma_comp_by_scn(struct drm_crtc *crtc, enum addon_scenario scn)
 {

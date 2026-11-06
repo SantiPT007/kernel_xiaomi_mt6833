@@ -170,10 +170,12 @@ void RamRead32A_LC898122AF(unsigned short RamAddr, void *ReadData)
 	/* LOG_INF("I2C r4 (%x %x)\n", RamAddr, (unsigned int)*pRcvBuff); */
 }
 
+#if 0
 void WitTim_LC898122AF(unsigned short UsWitTim)
 {
 	msleep(UsWitTim);
 }
+#endif
 
 void LC898prtvalue(unsigned short prtvalue)
 {

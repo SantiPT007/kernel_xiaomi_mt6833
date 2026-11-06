@@ -10,11 +10,13 @@
 
 #include "mtk-mmdebug-vcp.h"
 
+#if 0
 bool mmdebug_is_init_done(void)
 {
 	return true;
 }
 EXPORT_SYMBOL_GPL(mmdebug_is_init_done);
+#endif
 
 int mtk_mmdebug_status_dump_register_notifier(struct notifier_block *nb)
 {

@@ -148,6 +148,7 @@ int conn_md_dbg_init(void)
 
 }
 
+#if 0
 int conn_md_dbg_deinit(void)
 {
 
@@ -165,3 +166,4 @@ int conn_md_dbg_deinit(void)
 	return 0;
 
 }
+#endif

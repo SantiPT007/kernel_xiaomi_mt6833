@@ -5195,6 +5195,7 @@ static const struct file_operations fdvt_reg_proc_fops __maybe_unused = {
  *
  *****************************************************************************/
 
+#if 0
 int32_t FDVT_ClockOnCallback(uint64_t engineFlag)
 {
 	/* log_dbg("FDVT_ClockOnCallback"); */
@@ -5203,7 +5204,9 @@ int32_t FDVT_ClockOnCallback(uint64_t engineFlag)
 
 	return 0;
 }
+#endif
 
+#if 0
 int32_t FDVT_DumpCallback(uint64_t engineFlag, int level)
 {
 	log_dbg("[FDVT]DumpCallback");
@@ -5212,7 +5215,9 @@ int32_t FDVT_DumpCallback(uint64_t engineFlag, int level)
 
 	return 0;
 }
+#endif
 
+#if 0
 int32_t FDVT_ResetCallback(uint64_t engineFlag)
 {
 	log_dbg("[FDVT]ResetCallback");
@@ -5220,7 +5225,9 @@ int32_t FDVT_ResetCallback(uint64_t engineFlag)
 
 	return 0;
 }
+#endif
 
+#if 0
 int32_t FDVT_ClockOffCallback(uint64_t engineFlag)
 {
 	/* log_dbg("FDVT_ClockOffCallback"); */
@@ -5228,6 +5235,7 @@ int32_t FDVT_ClockOffCallback(uint64_t engineFlag)
 	/* log_dbg("-CmdqEn:%d", clock_enable_count); */
 	return 0;
 }
+#endif
 
 static signed int __init FDVT_Init(void)
 {

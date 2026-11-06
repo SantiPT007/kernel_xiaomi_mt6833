@@ -289,10 +289,12 @@ unsigned int __gpufreq_get_cur_fgpu(void)
 }
 
 /* API: get current Freq of STACK */
+#if 0
 unsigned int __gpufreq_get_cur_fstack(void)
 {
 	return 0;
 }
+#endif
 
 /* API: get current Volt of GPU */
 unsigned int __gpufreq_get_cur_vgpu(void)
@@ -301,10 +303,12 @@ unsigned int __gpufreq_get_cur_vgpu(void)
 }
 
 /* API: get current Volt of STACK */
+#if 0
 unsigned int __gpufreq_get_cur_vstack(void)
 {
 	return 0;
 }
+#endif
 
 /* API: get current Vsram of GPU */
 unsigned int __gpufreq_get_cur_vsram_gpu(void)
@@ -313,10 +317,12 @@ unsigned int __gpufreq_get_cur_vsram_gpu(void)
 }
 
 /* API: get current Vsram of STACK */
+#if 0
 unsigned int __gpufreq_get_cur_vsram_stack(void)
 {
 	return 0;
 }
+#endif
 
 /* API: get current Power of GPU */
 unsigned int __gpufreq_get_cur_pgpu(void)
@@ -325,10 +331,12 @@ unsigned int __gpufreq_get_cur_pgpu(void)
 }
 
 /* API: get current Power of STACK */
+#if 0
 unsigned int __gpufreq_get_cur_pstack(void)
 {
 	return 0;
 }
+#endif
 
 /* API: get max Power of GPU */
 unsigned int __gpufreq_get_max_pgpu(void)
@@ -337,10 +345,12 @@ unsigned int __gpufreq_get_max_pgpu(void)
 }
 
 /* API: get max Power of STACK */
+#if 0
 unsigned int __gpufreq_get_max_pstack(void)
 {
 	return 0;
 }
+#endif
 
 /* API: get min Power of GPU */
 unsigned int __gpufreq_get_min_pgpu(void)
@@ -349,10 +359,12 @@ unsigned int __gpufreq_get_min_pgpu(void)
 }
 
 /* API: get min Power of STACK */
+#if 0
 unsigned int __gpufreq_get_min_pstack(void)
 {
 	return 0;
 }
+#endif
 
 /* API: get current working OPP index of GPU */
 int __gpufreq_get_cur_idx_gpu(void)
@@ -385,10 +397,12 @@ int __gpufreq_get_signed_opp_num_gpu(void)
 }
 
 /* API: get number of signed OPP of STACK */
+#if 0
 int __gpufreq_get_signed_opp_num_stack(void)
 {
 	return 0;
 }
+#endif
 
 /* API: get poiner of working OPP table of GPU */
 const struct gpufreq_opp_info *__gpufreq_get_working_table_gpu(void)
@@ -397,10 +411,12 @@ const struct gpufreq_opp_info *__gpufreq_get_working_table_gpu(void)
 }
 
 /* API: get poiner of working OPP table of STACK */
+#if 0
 const struct gpufreq_opp_info *__gpufreq_get_working_table_stack(void)
 {
 	return NULL;
 }
+#endif
 
 /* API: get poiner of signed OPP table of GPU */
 const struct gpufreq_opp_info *__gpufreq_get_signed_table_gpu(void)
@@ -409,10 +425,12 @@ const struct gpufreq_opp_info *__gpufreq_get_signed_table_gpu(void)
 }
 
 /* API: get poiner of signed OPP table of STACK */
+#if 0
 const struct gpufreq_opp_info *__gpufreq_get_signed_table_stack(void)
 {
 	return NULL;
 }
+#endif
 
 /* API: get debug info of GPU for Proc show */
 struct gpufreq_debug_opp_info __gpufreq_get_debug_opp_info_gpu(void)
@@ -452,14 +470,17 @@ struct gpufreq_debug_opp_info __gpufreq_get_debug_opp_info_gpu(void)
 }
 
 /* API: get debug info of STACK for Proc show */
+#if 0
 struct gpufreq_debug_opp_info __gpufreq_get_debug_opp_info_stack(void)
 {
 	struct gpufreq_debug_opp_info opp_info = { };
 
 	return opp_info;
 }
+#endif
 
 /* API: get asensor info for Proc show */
+#if 0
 struct gpufreq_asensor_info __gpufreq_get_asensor_info(void)
 {
 	struct gpufreq_asensor_info asensor_info = { };
@@ -470,6 +491,7 @@ struct gpufreq_asensor_info __gpufreq_get_asensor_info(void)
 
 	return asensor_info;
 }
+#endif
 
 /* API: get Freq of GPU via OPP index */
 unsigned int __gpufreq_get_fgpu_by_idx(int oppidx)
@@ -481,12 +503,14 @@ unsigned int __gpufreq_get_fgpu_by_idx(int oppidx)
 }
 
 /* API: get Freq of STACK via OPP index */
+#if 0
 unsigned int __gpufreq_get_fstack_by_idx(int oppidx)
 {
 	GPUFREQ_UNREFERENCED(oppidx);
 
 	return 0;
 }
+#endif
 
 /* API: get Power of GPU via OPP index */
 unsigned int __gpufreq_get_pgpu_by_idx(int oppidx)
@@ -498,12 +522,14 @@ unsigned int __gpufreq_get_pgpu_by_idx(int oppidx)
 }
 
 /* API: get Power of STACK via OPP index */
+#if 0
 unsigned int __gpufreq_get_pstack_by_idx(int oppidx)
 {
 	GPUFREQ_UNREFERENCED(oppidx);
 
 	return 0;
 }
+#endif
 
 /* API: get working OPP index of GPU via Freq */
 int __gpufreq_get_idx_by_fgpu(unsigned int freq)
@@ -617,14 +643,17 @@ unsigned int __gpufreq_get_dyn_pgpu(unsigned int freq, unsigned int volt)
 }
 
 /* API: get leakage Power of STACK */
+#if 0
 unsigned int __gpufreq_get_lkg_pstack(unsigned int volt, int temper)
 {
 	GPUFREQ_UNREFERENCED(volt);
 
 	return 0;
 }
+#endif
 
 /* API: get dynamic Power of STACK */
+#if 0
 unsigned int __gpufreq_get_dyn_pstack(unsigned int freq, unsigned int volt)
 {
 	GPUFREQ_UNREFERENCED(freq);
@@ -632,6 +661,7 @@ unsigned int __gpufreq_get_dyn_pstack(unsigned int freq, unsigned int volt)
 
 	return 0;
 }
+#endif
 
 /*
  * API: control power state of whole MFG system
@@ -924,12 +954,14 @@ done:
 }
 
 /* API: fix OPP of STACK via given OPP index */
+#if 0
 int __gpufreq_fix_target_oppidx_stack(int oppidx)
 {
 	GPUFREQ_UNREFERENCED(oppidx);
 
 	return GPUFREQ_EINVAL;
 }
+#endif
 
 /* API: fix Freq and Volt of GPU via given Freq and Volt */
 int __gpufreq_fix_custom_freq_volt_gpu(unsigned int freq, unsigned int volt)
@@ -975,6 +1007,7 @@ done:
 }
 
 /* API: fix Freq and Volt of STACK via given Freq and Volt */
+#if 0
 int __gpufreq_fix_custom_freq_volt_stack(unsigned int freq, unsigned int volt)
 {
 	GPUFREQ_UNREFERENCED(freq);
@@ -982,7 +1015,9 @@ int __gpufreq_fix_custom_freq_volt_stack(unsigned int freq, unsigned int volt)
 
 	return GPUFREQ_EINVAL;
 }
+#endif
 
+#if 0
 void __gpufreq_set_timestamp(void)
 {
 	/* MFG_TIMESTAMP 0x13FBF130 [0] enable timestamp = 1'b1 */
@@ -990,7 +1025,9 @@ void __gpufreq_set_timestamp(void)
 	/* MFG_TIMESTAMP 0x13FBF130 [1] timer from soc = 1'b0 */
 	writel(0x00000003, g_mfg_top_base + 0x130);
 }
+#endif
 
+#if 0
 void __gpufreq_check_bus_idle(void)
 {
 	u32 val;
@@ -1010,6 +1047,7 @@ void __gpufreq_check_bus_idle(void)
 		val = readl(g_mfg_top_base + 0x178);
 	} while ((val & 0x4) != 0x4);
 }
+#endif
 
 void __gpufreq_dump_infra_status(char *log_buf, int *log_len, int log_size)
 {
@@ -1125,12 +1163,15 @@ int __gpufreq_get_low_batt_idx(int low_batt_level)
 }
 
 /* API: enable/disable random OPP index substitution to do stress test */
+#if 0
 void __gpufreq_set_stress_test(unsigned int mode)
 {
 	g_stress_test_enable = mode;
 }
+#endif
 
 /* API: apply/restore Vaging to working table of GPU */
+#if 0
 int __gpufreq_set_aging_mode(unsigned int mode)
 {
 	/* prevent from repeatedly applying aging */
@@ -1146,6 +1187,7 @@ int __gpufreq_set_aging_mode(unsigned int mode)
 		return GPUFREQ_EINVAL;
 	}
 }
+#endif
 
 /* API: get core_mask table */
 struct gpufreq_core_mask_info *__gpufreq_get_core_mask_table(void)
@@ -3158,28 +3200,34 @@ static void __gpufreq_init_shader_present(void)
 	GPUFREQ_LOGD("segment_id: %d, shader_present: %d", segment_id, g_shader_present);
 }
 
+#if 0
 void mt_gpufreq_set_gpu_wrap_fp(int (*gpu_wrap_fp) (void))
 {
 	mt_gpufreq_wrap_fp = gpu_wrap_fp;
 }
 EXPORT_SYMBOL(mt_gpufreq_set_gpu_wrap_fp);
+#endif
 
 /*
  * API : get current segment max opp index
  */
+#if 0
 unsigned int mt_gpufreq_get_seg_max_opp_index(void)
 {
 	return g_gpu.segment_upbound;
 }
 EXPORT_SYMBOL(mt_gpufreq_get_seg_max_opp_index);
+#endif
 
 /* API : get OPP table index number */
 /* need to sub g_segment_max_opp_idx to map to real idx */
+#if 0
 unsigned int mt_gpufreq_get_dvfs_table_num(void)
 {
 	return g_gpu.segment_lowbound - g_gpu.segment_upbound + 1;
 }
 EXPORT_SYMBOL(mt_gpufreq_get_dvfs_table_num);
+#endif
 
 
 /* power calculation for power table */
@@ -3293,17 +3341,21 @@ static void __mt_update_gpufreqs_power_table(void)
 	mutex_unlock(&gpufreq_lock);
 }
 
+#if 0
 struct mt_gpufreq_power_table_info *mt_gpufreq_get_power_table(void)
 {
 	return g_power_table;
 }
 EXPORT_SYMBOL(mt_gpufreq_get_power_table);
+#endif
 
+#if 0
 unsigned int mt_gpufreq_get_power_table_num(void)
 {
 	return g_gpu.signed_opp_num;
 }
 EXPORT_SYMBOL(mt_gpufreq_get_power_table_num);
+#endif
 
 /*
  * 1. init working OPP range

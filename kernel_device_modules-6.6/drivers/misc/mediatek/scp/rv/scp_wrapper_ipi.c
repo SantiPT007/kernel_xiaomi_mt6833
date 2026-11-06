@@ -222,6 +222,7 @@ enum scp_ipi_status scp_legacy_ipi_init(void)
 	return SCP_IPI_DONE;
 }
 
+#if 0
 bool mbox_check_send_table(unsigned int id)
 {
 	unsigned int i = 0;
@@ -232,6 +233,7 @@ bool mbox_check_send_table(unsigned int id)
 
 	return false;
 }
+#endif
 
 bool mbox_check_recv_table(unsigned int id)
 {

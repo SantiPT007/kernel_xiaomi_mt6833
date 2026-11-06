@@ -127,6 +127,7 @@ const unsigned long ClDiCof[COEFTBL] = {
 };
 
 
+#if 0
 unsigned short TneRun(void)
 {
 	unsigned char UcHlySts, UcHlxSts, UcAtxSts, UcAtySts;
@@ -262,10 +263,12 @@ unsigned short TneRun(void)
 
 	return UsFinSts;
 }
+#endif
 
 #ifndef HALLADJ_HW
 
 
+#if 0
 unsigned long TnePtp(unsigned char UcDirSel, unsigned char UcBfrAft)
 {
 	union UnDwdVal StTneVal;
@@ -364,8 +367,10 @@ unsigned long TnePtp(unsigned char UcDirSel, unsigned char UcBfrAft)
 
 	return StTneVal.UlDwdVal;
 }
+#endif
 
 unsigned short UsValBef, UsValNow;
+#if 0
 unsigned char TneCen(unsigned char UcTneAxs, union UnDwdVal StTneVal)
 {
 	unsigned char UcTneRst, UcTmeOut, UcTofRst;
@@ -522,7 +527,9 @@ unsigned char TneCen(unsigned char UcTneAxs, union UnDwdVal StTneVal)
 
 	return UcTneRst;
 }
+#endif
 
+#if 0
 unsigned long TneBia(union UnDwdVal StTneVal, unsigned char UcTneAxs)
 {
 	long SlSetBia;
@@ -685,7 +692,9 @@ unsigned long TneBia(union UnDwdVal StTneVal, unsigned char UcTneAxs)
 
 	return StTneVal.UlDwdVal;
 }
+#endif
 
+#if 0
 unsigned long TneOff(union UnDwdVal StTneVal, unsigned char UcTneAxs)
 {
 	long SlSetOff;
@@ -742,9 +751,11 @@ unsigned long TneOff(union UnDwdVal StTneVal, unsigned char UcTneAxs)
 
 	return StTneVal.UlDwdVal;
 }
+#endif
 
 #endif
 
+#if 0
 void MesFil(unsigned char UcMesMod)
 {
 #ifdef USE_EXTCLK_ALL    /* 24MHz */
@@ -967,6 +978,7 @@ void MesFil(unsigned char UcMesMod)
 	}
 #endif
 }
+#endif
 
 void SrvCon(unsigned char UcDirSel, unsigned char UcSwcCon)
 {
@@ -1285,6 +1297,7 @@ unsigned long GinMes(unsigned char UcXg1Xg2)
 #define LIMITH 0x0FA0
 #define LIMITL 0xF060
 #define INITVAL 0x0000
+#if 0
 unsigned char TneGvc(void)
 {
 	unsigned char UcRsltSts;
@@ -1348,6 +1361,7 @@ unsigned char TneGvc(void)
 	}
 	return UcRsltSts;
 }
+#endif
 
 unsigned char RtnCen(unsigned char UcCmdPar)
 {
@@ -1422,6 +1436,7 @@ void OisEna(void)
 }
 
 
+#if 0
 void OisEnaLin(void)
 {
 	/* Servo ON */
@@ -1430,8 +1445,10 @@ void OisEnaLin(void)
 
 	GyrCon(SPC);
 }
+#endif
 
 
+#if 0
 void TimPro(void)
 {
 #ifdef MODULE_CALIBRATION
@@ -1450,8 +1467,10 @@ void TimPro(void)
 	}
 #endif
 }
+#endif
 
 
+#if 0
 void S2cPro(unsigned char uc_mode)
 {
 	if (uc_mode == 1) {
@@ -1473,7 +1492,9 @@ void S2cPro(unsigned char uc_mode)
 #endif
 	}
 }
+#endif
 
+#if 0
 short GenMes(unsigned short UsRamAdd, unsigned char UcMesMod)
 {
 	short SsMesRlt;
@@ -1511,6 +1532,7 @@ short GenMes(unsigned short UsRamAdd, unsigned char UcMesMod)
 
 	return SsMesRlt;
 }
+#endif
 
 #ifdef USE_EXTCLK_ALL /* 24MHz */
 		      /********* Parameter Setting *********/
@@ -1564,6 +1586,7 @@ const unsigned short CucFreqVal[17] = {
 
 #define USE_SINLPF
 
+#if 0
 void SetSinWavePara(unsigned char UcTableVal, unsigned char UcMethodVal)
 {
 	unsigned short UsFreqDat;
@@ -1730,8 +1753,10 @@ void SetSinWavePara(unsigned char UcTableVal, unsigned char UcMethodVal)
 				     0x01); /* 0x0180       Sine wave  */
 	}
 }
+#endif
 
 #ifdef STANDBY_MODE
+#if 0
 void SetStandby(unsigned char UcContMode)
 {
 	unsigned char UcStbb0, UcClkon;
@@ -2033,6 +2058,7 @@ void SetStandby(unsigned char UcContMode)
 	}
 }
 #endif
+#endif
 
 void SetZsp(unsigned char UcZoomStepDat)
 {
@@ -2094,6 +2120,7 @@ void StbOnn(void)
 }
 
 
+#if 0
 void StbOnnN(unsigned char UcStbY, unsigned char UcStbX)
 {
 	unsigned char UcRegIni;
@@ -2115,7 +2142,9 @@ void StbOnnN(unsigned char UcStbY, unsigned char UcStbX)
 
 	RegWriteA_LC898122AF(WH_SMTSRVON, 0x00);
 }
+#endif
 
+#if 0
 void OptCen(unsigned char UcOptmode, unsigned short UsOptXval,
 	    unsigned short UsOptYval)
 {
@@ -2144,6 +2173,7 @@ void OptCen(unsigned char UcOptmode, unsigned short UsOptXval,
 
 	RamAccFixMod(OFF); /* Float mode */
 }
+#endif
 
 #ifdef MODULE_CALIBRATION
 
@@ -2662,6 +2692,7 @@ unsigned char BiasOffsetAdj(unsigned char UcJikuSel, unsigned char UcMeasCnt)
 
 #endif
 
+#if 0
 void GyrGan(unsigned char UcGygmode, unsigned long UlGygXval,
 	    unsigned long UlGygYval)
 {
@@ -2682,6 +2713,7 @@ void GyrGan(unsigned char UcGygmode, unsigned long UlGygXval,
 		break;
 	}
 }
+#endif
 
 void SetPanTiltMode(unsigned char UcPnTmod)
 {
@@ -2697,6 +2729,7 @@ void SetPanTiltMode(unsigned char UcPnTmod)
 
 #ifdef GAIN_CONT
 
+#if 0
 unsigned char TriSts(void)
 {
 	unsigned char UcRsltSts = 0;
@@ -2711,8 +2744,10 @@ unsigned char TriSts(void)
 	return UcRsltSts;
 }
 #endif
+#endif
 
 
+#if 0
 unsigned char DrvPwmSw(unsigned char UcSelPwmMod)
 {
 
@@ -2734,9 +2769,11 @@ unsigned char DrvPwmSw(unsigned char UcSelPwmMod)
 
 	return UcSelPwmMod << 4;
 }
+#endif
 
 #ifdef NEUTRAL_CENTER
 
+#if 0
 unsigned char TneHvc(void)
 {
 	unsigned char UcRsltSts;
@@ -2793,6 +2830,7 @@ unsigned char TneHvc(void)
 
 	return UcRsltSts;
 }
+#endif
 #endif /* NEUTRAL_CENTER */
 
 void SetGcf(unsigned char UcSetNum)
@@ -2901,6 +2939,7 @@ void SetH1cMod(unsigned char UcSetNum)
 }
 #endif
 
+#if 0
 unsigned short RdFwVr(void)
 {
 	unsigned short UsVerVal;
@@ -2908,3 +2947,4 @@ unsigned short RdFwVr(void)
 	UsVerVal = (unsigned short)((MDL_VER << 8) | FW_VER);
 	return UsVerVal;
 }
+#endif

@@ -1721,6 +1721,7 @@ void nicCmdEventBatchScanResult(struct ADAPTER
 }
 #endif
 
+#if 0
 void nicEventHifCtrlv2(struct ADAPTER *prAdapter,
 		     struct WIFI_EVENT *prEvent)
 {
@@ -1751,6 +1752,7 @@ void nicEventHifCtrlv2(struct ADAPTER *prAdapter,
 	}
 #endif
 }
+#endif
 
 void nicEventHifCtrl(struct ADAPTER *prAdapter,
 		     struct WIFI_EVENT *prEvent)
@@ -3725,12 +3727,14 @@ uint32_t nicEventQueryTxResource_v1(struct ADAPTER
 	return WLAN_STATUS_SUCCESS;
 }
 
+#if 0
 uint32_t nicEventQueryTxResource_v2(struct ADAPTER
 				    *prAdapter, uint8_t *pucEventBuf)
 {
 	/* Follow V1 as default */
 	return nicEventQueryTxResource_v1(prAdapter, pucEventBuf);
 }
+#endif
 
 uint32_t nicParsingNicCapV2(struct ADAPTER *prAdapter,
 	uint32_t u4Type, uint8_t *pucEventBuf)
@@ -4963,6 +4967,7 @@ void nicEventSleepyNotify(struct ADAPTER *prAdapter,
 #endif
 }
 
+#if 0
 void nicEventBtOverWifi(struct ADAPTER *prAdapter,
 			struct WIFI_EVENT *prEvent)
 {
@@ -5015,6 +5020,7 @@ void nicEventBtOverWifi(struct ADAPTER *prAdapter,
 	}
 #endif
 }
+#endif
 
 void nicEventStatistics(struct ADAPTER *prAdapter,
 			struct WIFI_EVENT *prEvent)

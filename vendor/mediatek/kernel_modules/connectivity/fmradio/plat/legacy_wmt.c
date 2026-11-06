@@ -271,31 +271,39 @@ static unsigned int drv_get_get_adie(void)
 #endif
 }
 
+#if 0
 signed int __weak fm_low_ops_register(struct fm_callback *cb,
 				       struct fm_basic_interface *bi)
 {
 	WCN_DBG(FM_NTC | CHIP, "default %s\n", __func__);
 	return -1;
 }
+#endif
 
+#if 0
 signed int __weak fm_low_ops_unregister(struct fm_basic_interface *bi)
 {
 	WCN_DBG(FM_NTC | CHIP, "default %s\n", __func__);
 	return -1;
 }
+#endif
 
+#if 0
 signed int __weak fm_rds_ops_register(struct fm_basic_interface *bi,
 				      struct fm_rds_interface *ri)
 {
 	WCN_DBG(FM_NTC | CHIP, "default %s\n", __func__);
 	return -1;
 }
+#endif
 
+#if 0
 signed int __weak fm_rds_ops_unregister(struct fm_rds_interface *ri)
 {
 	WCN_DBG(FM_NTC | CHIP, "default %s\n", __func__);
 	return -1;
 }
+#endif
 
 signed int __weak mt6631_fm_low_ops_register(
 	struct fm_callback *cb, struct fm_basic_interface *bi)
@@ -399,9 +407,11 @@ void register_fw_ops_init(void)
 	}
 }
 
+#if 0
 void register_fw_ops_uninit(void)
 {
 }
+#endif
 
 int fm_register_irq(struct platform_driver *drv, unsigned int irq_num)
 {
@@ -421,9 +431,11 @@ int fm_wcn_ops_register(void)
 	return 0;
 }
 
+#if 0
 int fm_wcn_ops_unregister(void)
 {
 	register_fw_ops_uninit();
 
 	return 0;
 }
+#endif

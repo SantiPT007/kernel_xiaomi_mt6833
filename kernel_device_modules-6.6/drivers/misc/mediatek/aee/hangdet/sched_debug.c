@@ -178,6 +178,7 @@ print_task_at_AEE(struct seq_file *m, struct rq *rq, struct task_struct *p)
 	 1 : ({ local_irq_restore(flags); 0; }); \
 	 })
 
+#if 0
 int read_trylock_n_irqsave(rwlock_t *lock,
 		unsigned long *flags, struct seq_file *m, char *msg)
 {
@@ -222,7 +223,9 @@ int read_trylock_n_irqsave(rwlock_t *lock,
 
 	return locked;
 }
+#endif
 
+#if 0
 int raw_spin_trylock_n_irqsave(raw_spinlock_t *lock,
 		unsigned long *flags, struct seq_file *m, char *msg)
 {
@@ -271,6 +274,7 @@ int raw_spin_trylock_n_irqsave(raw_spinlock_t *lock,
 
 	return locked;
 }
+#endif
 
 int spin_trylock_n_irqsave(spinlock_t *lock,
 		unsigned long *flags, struct seq_file *m, char *msg)

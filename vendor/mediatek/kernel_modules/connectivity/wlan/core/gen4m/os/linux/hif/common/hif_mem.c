@@ -617,6 +617,7 @@ void halCopyPathAllocExtBuf(struct GL_HIF_INFO *prHifInfo,
 		memset(prDescRing->AllocVa, 0, prDescRing->AllocSize);
 }
 
+#if 0
 void halCopyPathFreeExtBuf(struct GL_HIF_INFO *prHifInfo,
 			   struct RTMP_DMABUF *prDescRing)
 {
@@ -627,6 +628,7 @@ void halCopyPathFreeExtBuf(struct GL_HIF_INFO *prHifInfo,
 		WIFI_RSV_MEM_WFDMA);
 	memset(prDescRing, 0, sizeof(struct RTMP_DMABUF));
 }
+#endif
 #endif /* CFG_MTK_ANDROID_WMT */
 
 #if (CFG_MTK_WIFI_MISC_RSV_MEM == 1)
@@ -1503,6 +1505,7 @@ void halCopyPathDumpRx(struct GL_HIF_INFO *prHifInfo,
 		DBGLOG_MEM32(HAL, INFO, prRxCell->pPacket, u4DumpLen);
 }
 
+#if 0
 void halZeroCopyPathAllocDesc(struct GL_HIF_INFO *prHifInfo,
 			  struct RTMP_DMABUF *prDescRing,
 			  uint32_t u4Num)
@@ -1516,7 +1519,9 @@ void halZeroCopyPathAllocDesc(struct GL_HIF_INFO *prHifInfo,
 	if (prDescRing->AllocVa)
 		memset(prDescRing->AllocVa, 0, prDescRing->AllocSize);
 }
+#endif
 
+#if 0
 void halZeroCopyPathAllocExtBuf(struct GL_HIF_INFO *prHifInfo,
 			    struct RTMP_DMABUF *prDescRing,
 			    uint32_t u4Align)
@@ -1524,6 +1529,7 @@ void halZeroCopyPathAllocExtBuf(struct GL_HIF_INFO *prHifInfo,
 	prDescRing->rMem.align_size = 0;
 	halZeroCopyPathAllocDesc(prHifInfo, prDescRing, 0);
 }
+#endif
 
 void halZeroCopyPathAllocTxDataBuf(struct MSDU_TOKEN_ENTRY *prToken,
 				   uint32_t u4Idx)
@@ -1670,12 +1676,14 @@ bool halZeroCopyPathCopyEvent(struct GL_HIF_INFO *prHifInfo,
 	return true;
 }
 
+#if 0
 bool halZeroCopyPathCopyTxData(struct MSDU_TOKEN_ENTRY *prToken,
 			   void *pucSrc, uint32_t u4Len)
 {
 	memcpy(prToken->prPacket, pucSrc, u4Len);
 	return true;
 }
+#endif
 
 bool halZeroCopyPathCopyRxData(struct GL_HIF_INFO *prHifInfo,
 			   struct RTMP_DMACB *pRxCell,
@@ -1765,6 +1773,7 @@ phys_addr_t halZeroCopyPathMapRxBuf(struct GL_HIF_INFO *prHifInfo,
 	return (phys_addr_t)rDmaAddr;
 }
 
+#if 0
 void halZeroCopyPathUnmapTxDataBuf(struct GL_HIF_INFO *prHifInfo,
 			   phys_addr_t rDmaAddr, uint32_t u4Len)
 {
@@ -1772,8 +1781,10 @@ void halZeroCopyPathUnmapTxDataBuf(struct GL_HIF_INFO *prHifInfo,
 			     (dma_addr_t)rDmaAddr,
 			     u4Len, KAL_DMA_TO_DEVICE);
 }
+#endif
 
 
+#if 0
 void halZeroCopyPathUnmapTxCmdBuf(struct GL_HIF_INFO *prHifInfo,
 			   phys_addr_t rDmaAddr, uint32_t u4Len)
 {
@@ -1781,6 +1792,7 @@ void halZeroCopyPathUnmapTxCmdBuf(struct GL_HIF_INFO *prHifInfo,
 			     (dma_addr_t)rDmaAddr,
 			     u4Len, KAL_DMA_TO_DEVICE);
 }
+#endif
 
 void halZeroCopyPathUnmapRxBuf(struct GL_HIF_INFO *prHifInfo,
 			       phys_addr_t rDmaAddr, uint32_t u4Len)
@@ -1790,6 +1802,7 @@ void halZeroCopyPathUnmapRxBuf(struct GL_HIF_INFO *prHifInfo,
 			     u4Len, KAL_DMA_FROM_DEVICE);
 }
 
+#if 0
 void halZeroCopyPathFreeDesc(struct GL_HIF_INFO *prHifInfo,
 			 struct RTMP_DMABUF *prDescRing)
 {
@@ -1802,6 +1815,7 @@ void halZeroCopyPathFreeDesc(struct GL_HIF_INFO *prHifInfo,
 			      (dma_addr_t)prDescRing->AllocPa);
 	memset(prDescRing, 0, sizeof(struct RTMP_DMABUF));
 }
+#endif
 
 void halZeroCopyPathFreeDataBuf(void *pucSrc, uint32_t u4Len,
 	phys_addr_t rDmaAddr, uint32_t u4Idx)
@@ -1809,16 +1823,20 @@ void halZeroCopyPathFreeDataBuf(void *pucSrc, uint32_t u4Len,
 	kalMemFree(pucSrc, PHY_MEM_TYPE, u4Len);
 }
 
+#if 0
 void halZeroCopyPathFreeCmdBuf(void *pucSrc, uint32_t u4Len)
 {
 	kalMemFree(pucSrc, PHY_MEM_TYPE, u4Len);
 }
+#endif
 
+#if 0
 void halZeroCopyPathFreePacket(struct GL_HIF_INFO *prHifInfo,
 			   void *pvPacket, uint32_t u4Num)
 {
 	kalPacketFree(NULL, pvPacket);
 }
+#endif
 
 void halZeroCopyPathDumpTx(struct GL_HIF_INFO *prHifInfo,
 		       struct RTMP_TX_RING *prTxRing,
@@ -1867,6 +1885,7 @@ void halZeroCopyPathDumpRx(struct GL_HIF_INFO *prHifInfo,
 		0, prDmaBuf->AllocSize);
 }
 
+#if 0
 struct HIF_MEM *halGetWiFiMiscRsvEmi(
 	struct mt66xx_chip_info *prChipInfo,
 	enum WIFI_MISC_MEM_BLOCK_NAME u4name)
@@ -1884,6 +1903,7 @@ struct HIF_MEM *halGetWiFiMiscRsvEmi(
 
 	return NULL;
 }
+#endif
 
 #if CFG_SUPPORT_PAGE_POOL_USE_CMA
 void *halZeroCopyPathAllocPagePoolRxBuf(struct GL_HIF_INFO *prHifInfo,
@@ -2481,6 +2501,7 @@ static int halSetMemOpsPC(
 	return 0;
 }
 
+#if 0
 int halSetMemOps(
 	struct platform_device *prPlatDev,
 	struct HIF_MEM_OPS *prMemOps)
@@ -2492,9 +2513,12 @@ int halSetMemOps(
 
 	return 0;
 }
+#endif
 
+#if 0
 void glUpdateRxCopyMemOps(struct HIF_MEM_OPS *prMemOps)
 {
 	halSetMemOpsRxData(prMemOps, WF_MEM_OP_RX_DATA_COPY_PATH);
 	halSetMemOpsRxDump(prMemOps, WF_MEM_OP_RX_DUMP_COPY_PATH);
 }
+#endif

@@ -724,11 +724,13 @@ scanSearchBssDescByBssidAndSsid(struct ADAPTER *prAdapter,
  * @return   Pointer to BSS Descriptor, if found. NULL, if not found
  */
 /*----------------------------------------------------------------------------*/
+#if 0
 struct BSS_DESC *scanSearchBssDescByTA(struct ADAPTER *prAdapter,
 	uint8_t aucSrcAddr[])
 {
 	return scanSearchBssDescByTAAndSsid(prAdapter, aucSrcAddr, FALSE, NULL);
 }
+#endif
 
 /*----------------------------------------------------------------------------*/
 /*!
@@ -872,6 +874,7 @@ scanSearchBssDescByLinkIdMldAddrSsid(struct ADAPTER *prAdapter,
  * @return   Pointer to BSS Descriptor, if found. NULL, if not found
  */
 /*----------------------------------------------------------------------------*/
+#if 0
 struct BSS_DESC *
 scanSearchExistingBssDesc(struct ADAPTER *prAdapter,
 			  enum ENUM_BSS_TYPE eBSSType,
@@ -881,6 +884,7 @@ scanSearchExistingBssDesc(struct ADAPTER *prAdapter,
 	return scanSearchExistingBssDescWithSsid(prAdapter, eBSSType, aucBSSID,
 		aucSrcAddr, FALSE, NULL);
 }
+#endif
 
 /*----------------------------------------------------------------------------*/
 /*!
@@ -5130,6 +5134,7 @@ void scanFillChnlIdleSlot(struct ADAPTER *ad, enum ENUM_BAND eBand,
 	}
 }
 
+#if 0
 uint16_t scanGetChnlIdleSlot(struct ADAPTER *ad, enum ENUM_BAND eBand,
 	uint8_t ucChNum)
 {
@@ -5167,6 +5172,7 @@ uint16_t scanGetChnlIdleSlot(struct ADAPTER *ad, enum ENUM_BAND eBand,
 
 	return u2Slot;
 }
+#endif
 
 
 /*----------------------------------------------------------------------------*/
@@ -5628,6 +5634,7 @@ void scanHandleOceIE(struct SCAN_PARAM *prScanParam,
 	dumpMemory8(pucBuf, prScanParam->u2IELen);
 }
 
+#if 0
 uint8_t	*scanGetFilsCacheIdFromBssDesc(struct BSS_DESC *bss)
 {
 	uint8_t *ie;
@@ -5651,6 +5658,7 @@ uint8_t	*scanGetFilsCacheIdFromBssDesc(struct BSS_DESC *bss)
 
 	return NULL;
 }
+#endif
 
 #if (CFG_SUPPORT_WIFI_6G == 1)
 void scanParseHEOpIE(struct ADAPTER *prAdapter, uint8_t *pucIE,

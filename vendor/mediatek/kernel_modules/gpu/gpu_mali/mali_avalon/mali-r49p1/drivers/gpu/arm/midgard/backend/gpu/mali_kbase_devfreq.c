@@ -232,12 +232,14 @@ static int kbase_devfreq_target(struct device *dev, unsigned long *target_freq, 
 	return 0;
 }
 
+#if 0
 void kbase_devfreq_force_freq(struct kbase_device *kbdev, unsigned long freq)
 {
 	unsigned long target_freq = freq;
 
 	kbase_devfreq_target(kbdev->dev, &target_freq, 0);
 }
+#endif
 
 static int kbase_devfreq_cur_freq(struct device *dev, unsigned long *freq)
 {

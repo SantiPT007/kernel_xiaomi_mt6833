@@ -502,17 +502,21 @@ int ccu_unlock_user_mutex(void)
 	return 0;
 }
 
+#if 0
 int ccu_lock_ion_client_mutex(void)
 {
 	mutex_lock(&g_ccu_device->ion_client_mutex);
 	return 0;
 }
+#endif
 
+#if 0
 int ccu_unlock_ion_client_mutex(void)
 {
 	mutex_unlock(&g_ccu_device->ion_client_mutex);
 	return 0;
 }
+#endif
 
 /*---------------------------------------------------------------------------*/
 /* IOCTL: implementation                                                     */

@@ -19,6 +19,7 @@ long long msec_high(unsigned long long nsec)
 	return nsec;
 }
 
+#if 0
 unsigned long msec_low(unsigned long long nsec)
 {
 	if ((long long)nsec < 0)
@@ -26,7 +27,9 @@ unsigned long msec_low(unsigned long long nsec)
 
 	return do_div(nsec, 1000000);
 }
+#endif
 
+#if 0
 long long usec_high(unsigned long long nsec)
 {
 	if ((long long)nsec < 0) {
@@ -38,6 +41,7 @@ long long usec_high(unsigned long long nsec)
 
 	return nsec;
 }
+#endif
 
 long long sec_high(unsigned long long nsec)
 {

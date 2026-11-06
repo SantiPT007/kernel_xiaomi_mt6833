@@ -103,6 +103,7 @@ int get_charger_exist(void)
 	return false;
 }
 
+#if 0
 int get_charger_status(struct mtk_battery *gm)
 {
 	int charger_status = 0;
@@ -117,6 +118,7 @@ int get_charger_status(struct mtk_battery *gm)
 
 	return charger_status;
 }
+#endif
 
 int get_imix_r(void)
 {
@@ -1161,10 +1163,12 @@ void fgr_set_soc_by_vc_mode(struct mtk_battery *gm)
 	gm->algo.soc = gm->algo.fg_c_soc;
 }
 
+#if 0
 void fgr_update_fg_bat_tmp_threshold_c(struct mtk_battery *gm)
 {
 	gm->algo.fg_bat_tmp_c_gap = 1;
 }
+#endif
 
 void fgr_update_c_dod(struct mtk_battery *gm)
 {

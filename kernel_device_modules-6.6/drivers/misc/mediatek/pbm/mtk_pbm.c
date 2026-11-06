@@ -42,7 +42,9 @@ static LIST_HEAD(pbm_policy_list);
 static bool mt_pbm_debug;
 
 #define DLPTCB_MAX_NUM 16
+#if 0
 static struct pbm_callback_table pbmcb_tb[DLPTCB_MAX_NUM] = { {0} };
+#endif
 #if IS_ENABLED(CONFIG_MTK_GPUFREQ_V2)
 static struct pbm_gpu_callback_table pbm_gpu_cb = {0, 0, 0, 0, 0};
 #endif
@@ -707,6 +709,7 @@ static void tracepoint_cleanup(void)
 	}
 }
 
+#if 0
 void register_pbm_notify(void *oc_cb, enum PBM_PRIO_TAG prio_val)
 {
 	if (prio_val == PBM_PRIO_GPU) {
@@ -727,12 +730,15 @@ void register_pbm_notify(void *oc_cb, enum PBM_PRIO_TAG prio_val)
 	}
 }
 EXPORT_SYMBOL(register_pbm_notify);
+#endif
 
+#if 0
 void register_pbm_gpu_notify(void *cb)
 {
 	register_pbm_notify(cb, PBM_PRIO_GPU);
 }
 EXPORT_SYMBOL(register_pbm_gpu_notify);
+#endif
 
 static int mt_pbm_debug_proc_show(struct seq_file *m, void *v)
 {

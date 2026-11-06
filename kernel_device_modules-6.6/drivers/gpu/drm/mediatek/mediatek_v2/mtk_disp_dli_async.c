@@ -144,10 +144,12 @@ void mtk_dli_async_dump(struct mtk_ddp_comp *comp)
 		readl(baddr + 0x2CC));
 }
 
+#if 0
 int mtk_dli_async_analysis(struct mtk_ddp_comp *comp)
 {
 	return 0;
 }
+#endif
 
 static void mtk_dli_async_start(struct mtk_ddp_comp *comp, struct cmdq_pkt *handle)
 {

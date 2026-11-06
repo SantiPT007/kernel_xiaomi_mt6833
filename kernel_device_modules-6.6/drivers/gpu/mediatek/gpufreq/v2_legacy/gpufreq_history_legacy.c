@@ -74,6 +74,7 @@ static unsigned int gpufreq_history_bit_reverse(unsigned int x)
 	return x;
 }
 
+#if 0
 const unsigned int *gpufreq_history_get_log(void)
 {
 	int i = 0;
@@ -90,6 +91,7 @@ const unsigned int *gpufreq_history_get_log(void)
 done:
 	return g_history_log;
 }
+#endif
 
 int gpufreq_history_init(void)
 {

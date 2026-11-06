@@ -41,10 +41,12 @@
 
 static struct nanohub_data *g_nanohub_data_p;
 
+#if 0
 int nanohub_wait_for_interrupt(struct nanohub_data *data)
 {
 	return 0;
 }
+#endif
 
 int nanohub_wakeup_eom(struct nanohub_data *data, bool repeat)
 {

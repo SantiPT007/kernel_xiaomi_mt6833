@@ -152,6 +152,7 @@ struct qos_bound *get_qos_bound(void)
 }
 EXPORT_SYMBOL_GPL(get_qos_bound);
 
+#if 0
 int get_qos_bound_bw_threshold(int state)
 {
 	int val = 0;
@@ -168,6 +169,7 @@ int get_qos_bound_bw_threshold(int state)
 	return 0;
 }
 EXPORT_SYMBOL(get_qos_bound_bw_threshold);
+#endif
 
 unsigned short get_qos_bound_idx(void)
 {
@@ -178,17 +180,21 @@ unsigned short get_qos_bound_idx(void)
 }
 EXPORT_SYMBOL(get_qos_bound_idx);
 
+#if 0
 int register_qos_notifier(struct notifier_block *nb)
 {
 	return blocking_notifier_chain_register(&qos_bound_chain_head, nb);
 }
 EXPORT_SYMBOL(register_qos_notifier);
+#endif
 
+#if 0
 int unregister_qos_notifier(struct notifier_block *nb)
 {
 	return blocking_notifier_chain_unregister(&qos_bound_chain_head, nb);
 }
 EXPORT_SYMBOL(unregister_qos_notifier);
+#endif
 
 int qos_notifier_call_chain(unsigned long val, void *v)
 {
@@ -255,6 +261,7 @@ unsigned short get_qos_bound_apubw_mon(int idx, int master)
 }
 EXPORT_SYMBOL_GPL(get_qos_bound_apubw_mon);
 
+#if 0
 unsigned short get_qos_bound_apulat_mon(int idx, int master)
 {
 	unsigned short *lat_val;
@@ -274,8 +281,10 @@ unsigned short get_qos_bound_apulat_mon(int idx, int master)
 	return *lat_val;
 }
 EXPORT_SYMBOL_GPL(get_qos_bound_apulat_mon);
+#endif
 
 
+#if 0
 unsigned short get_qos_bound_emibw_mon(int idx, int master)
 {
 	unsigned short val = 0;
@@ -295,7 +304,9 @@ unsigned short get_qos_bound_emibw_mon(int idx, int master)
 	return val;
 }
 EXPORT_SYMBOL_GPL(get_qos_bound_emibw_mon);
+#endif
 
+#if 0
 unsigned short get_qos_bound_smibw_mon(int idx, int master)
 {
 	unsigned short val = 0;
@@ -315,3 +326,4 @@ unsigned short get_qos_bound_smibw_mon(int idx, int master)
 	return val;
 }
 EXPORT_SYMBOL_GPL(get_qos_bound_smibw_mon);
+#endif

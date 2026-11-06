@@ -4843,6 +4843,7 @@ static struct notifier_block mfb_suspend_pm_notifier_func = {
  *
  ******************************************************************************/
 
+#if 0
 int32_t MFB_ClockOnCallback(uint64_t engineFlag)
 {
 	/* LOG_DBG("MFB_ClockOnCallback"); */
@@ -4851,7 +4852,9 @@ int32_t MFB_ClockOnCallback(uint64_t engineFlag)
 
 	return 0;
 }
+#endif
 
+#if 0
 int32_t MFB_DumpCallback(uint64_t engineFlag, int level)
 {
 	LOG_DBG("MFB_DumpCallback");
@@ -4860,7 +4863,9 @@ int32_t MFB_DumpCallback(uint64_t engineFlag, int level)
 
 	return 0;
 }
+#endif
 
+#if 0
 int32_t MFB_ResetCallback(uint64_t engineFlag)
 {
 	LOG_DBG("MSS_ResetCallback");
@@ -4869,7 +4874,9 @@ int32_t MFB_ResetCallback(uint64_t engineFlag)
 
 	return 0;
 }
+#endif
 
+#if 0
 int32_t MFB_ClockOffCallback(uint64_t engineFlag)
 {
 	/* LOG_DBG("MFB_ClockOffCallback"); */
@@ -4877,6 +4884,7 @@ int32_t MFB_ClockOffCallback(uint64_t engineFlag)
 	/* LOG_DBG("-CmdqEn:%d", g_u4EnableClockCount); */
 	return 0;
 }
+#endif
 
 static signed int __init MFB_Init(void)
 {

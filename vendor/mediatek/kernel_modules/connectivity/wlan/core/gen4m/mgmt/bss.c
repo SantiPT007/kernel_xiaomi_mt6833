@@ -2532,15 +2532,19 @@ void bssInitForAP(struct ADAPTER *prAdapter, struct BSS_INFO *prBssInfo,
 
 #endif /* CFG_SUPPORT_AAA */
 
+#if 0
 void bssCreateStaRecFromAuth(struct ADAPTER *prAdapter)
 {
 
 }
+#endif
 
+#if 0
 void bssUpdateStaRecFromAssocReq(struct ADAPTER *prAdapter)
 {
 
 }
+#endif
 
 void bssUpdateStaRecFromBssDesc(struct ADAPTER *prAdapter,
 				struct BSS_DESC *prBssDesc,

@@ -168,10 +168,12 @@ struct gpufreq_core_mask_info *dcs_get_avail_mask_table(void)
 	return g_avail_mask_table;
 }
 
+#if 0
 int dcs_get_dcs_opp_setting(void)
 {
 	return g_dcs_opp_setting;
 }
+#endif
 
 int dcs_get_cur_core_num(void)
 {
@@ -272,14 +274,18 @@ void dcs_fix_reset(void)
 	pr_info("g_debug timer reset  %X", g_fix_core_num);
 }
 
+#if 0
 unsigned int dcs_get_fix_num(void)
 {
 	return g_fix_core_num;
 }
+#endif
+#if 0
 unsigned int dcs_get_fix_mask(void)
 {
 	return g_fix_core_mask;
 }
+#endif
 
 bool dcs_get_setting_dirty(void)
 {
@@ -372,6 +378,7 @@ void dcs_set_adjust_support(unsigned int val)
 }
 EXPORT_SYMBOL(dcs_set_adjust_support);
 
+#if 0
 void dcs_set_adjust_ratio_th(unsigned int val)
 {
 	mutex_lock(&g_DCS_lock);
@@ -379,6 +386,7 @@ void dcs_set_adjust_ratio_th(unsigned int val)
 	mutex_unlock(&g_DCS_lock);
 }
 EXPORT_SYMBOL(dcs_set_adjust_ratio_th);
+#endif
 
 void dcs_set_adjust_fr_cnt(unsigned int val)
 {
@@ -388,6 +396,7 @@ void dcs_set_adjust_fr_cnt(unsigned int val)
 }
 EXPORT_SYMBOL(dcs_set_adjust_fr_cnt);
 
+#if 0
 void dcs_set_adjust_non_dcs_th(unsigned int val)
 {
 	mutex_lock(&g_DCS_lock);
@@ -395,6 +404,7 @@ void dcs_set_adjust_non_dcs_th(unsigned int val)
 	mutex_unlock(&g_DCS_lock);
 }
 EXPORT_SYMBOL( dcs_set_adjust_non_dcs_th);
+#endif
 
 unsigned int dcs_get_adjust_support(void)
 {

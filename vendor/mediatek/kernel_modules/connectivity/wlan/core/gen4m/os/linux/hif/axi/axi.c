@@ -780,24 +780,30 @@ void glBusFreeIrq(void *pvData, void *pvCookie)
 #endif
 }
 
+#if 0
 u_int8_t glIsReadClearReg(uint32_t u4Address)
 {
 	return TRUE;
 }
+#endif
 
+#if 0
 void glSetPowerState(struct GLUE_INFO *prGlueInfo, uint32_t ePowerMode)
 {
 }
+#endif
 
 void glGetDev(void *ctx, void **dev)
 {
 	*dev = &((struct platform_device *)ctx)->dev;
 }
 
+#if 0
 void glGetHifDev(struct GL_HIF_INFO *prHif, struct device **dev)
 {
 	*dev = &(prHif->pdev->dev);
 }
+#endif
 
 void glGetChipInfo(void **prChipInfo)
 {

@@ -209,6 +209,7 @@ int mtkTTimer_unregister(const char *name)
 	return 0;
 }
 
+#if 0
 void mtkTTimer_cancel_timer(void)
 {
 	int i;
@@ -222,7 +223,9 @@ void mtkTTimer_cancel_timer(void)
 	spin_unlock(&tTimer_lock);
 }
 EXPORT_SYMBOL(mtkTTimer_cancel_timer);
+#endif
 
+#if 0
 void mtkTTimer_start_timer(void)
 {
 	int i;
@@ -236,6 +239,7 @@ void mtkTTimer_start_timer(void)
 	spin_unlock(&tTimer_lock);
 }
 EXPORT_SYMBOL(mtkTTimer_start_timer);
+#endif
 #if defined(LVTS_CPU_PM_NTFY_CALLBACK)
 static struct cpumask mt_cpu_pdn_mask;
 static DEFINE_SPINLOCK(mt_thermal_timer_locker);
@@ -293,10 +297,12 @@ struct notifier_block mtk_thermal_pm = {
 };
 
 
+#if 0
 void  mtk_thermal_pm_exit(void)
 {
 	cpu_pm_unregister_notifier(&mtk_thermal_pm);
 }
+#endif
 
 int  mtk_thermal_pm_init(void)
 {

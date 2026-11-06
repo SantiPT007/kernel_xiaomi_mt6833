@@ -57,6 +57,7 @@ p2pRoleP2pLisStopDbdcDecision(
 static void p2pRoleFsmHandleBssUnlink(struct ADAPTER *prAdapter,
 	uint8_t ucRoleIdx);
 
+#if 0
 u_int8_t p2pRoleFsmNeedMlo(
 	struct ADAPTER *prAdapter,
 	uint8_t ucRoleIdx)
@@ -70,6 +71,7 @@ u_int8_t p2pRoleFsmNeedMlo(
 	return FALSE;
 #endif
 }
+#endif
 
 void
 p2pRoleFsmStaCsaUpdt(struct ADAPTER *prAdapter,
@@ -5562,6 +5564,7 @@ u_int8_t indicateApAcsOverwrite(
 	return bOverwrite;
 }
 
+#if 0
 u_int8_t p2pIsBssInScanScope(
 	struct ADAPTER *prAdapter,
 	struct MSG_P2P_ACS_REQUEST *prMsgAcsRequest,
@@ -5589,6 +5592,7 @@ u_int8_t p2pIsBssInScanScope(
 	}
 	return false;
 }
+#endif
 static void p2pRoleFsmSetSafeBitmap(struct ADAPTER *prAdapter,
 				struct P2P_ACS_REQ_INFO *prAcsReqInfo,
 				enum ENUM_BAND eBand,

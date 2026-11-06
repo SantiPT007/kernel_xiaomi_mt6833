@@ -131,10 +131,12 @@ unsigned short int RD_I2C(unsigned char slvadr, unsigned char size,
 /* You have to port your own system. */
 /*  */
 /* ********************************************************* */
+#if 0
 void store_FADJ_MEM_to_non_volatile_memory(struct _FACT_ADJ param)
 {
 
 }
+#endif
 
 /* ********************************************************* */
 /* Read Factory Adjusted data from the non-volatile memory */
@@ -232,10 +234,12 @@ struct _FACT_ADJ get_FADJ_MEM_from_non_volatile_memory(void)
 /* <Description> */
 /*  */
 /* ********************************************************* */
+#if 0
 void Wait_usec(unsigned long int time)
 {
 	/* Please write your source code here. */
 }
+#endif
 
 #ifdef DEBUG_FADJ
 /* ********************************************************* */

@@ -8,11 +8,21 @@
 #include "sspm_ipi_id.h"
 
 /* debug API */
+#if 0
 __weak void dump_emi_outstanding(void) {}
+#endif
+#if 0
 __weak void mtk_spm_dump_debug_info(void) {}
+#endif
+#if 0
 __weak void usb_dump_debug_register(void) {}
+#endif
+#if 0
 __weak void dpmaif_dump_reg(void) {}
+#endif
+#if 0
 __weak void ccci_md_debug_dump(char *user_info) {}
+#endif
 
 static char *pin_name[SSPM_IPI_COUNT] = {
 	"PPM",

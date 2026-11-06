@@ -743,6 +743,7 @@ const char *decode_fault_source_shader_w_t(u16 idx, u32 gpu_id)
 	return ret;
 }
 
+#if 0
 const char *decode_fault_source_tiler_r_t(u16 idx, u32 gpu_id)
 {
 	u16 min_rev = GPU_ID_ARCH_ID_MINOR_AND_REV_GET(gpu_id);
@@ -768,7 +769,9 @@ const char *decode_fault_source_tiler_r_t(u16 idx, u32 gpu_id)
 	}
 	return ret;
 }
+#endif
 
+#if 0
 const char *decode_fault_source_tiler_w_t(u16 idx, u32 gpu_id)
 {
 	u16 min_rev = GPU_ID_ARCH_ID_MINOR_AND_REV_GET(gpu_id);
@@ -794,3 +797,4 @@ const char *decode_fault_source_tiler_w_t(u16 idx, u32 gpu_id)
 	}
 	return ret;
 }
+#endif

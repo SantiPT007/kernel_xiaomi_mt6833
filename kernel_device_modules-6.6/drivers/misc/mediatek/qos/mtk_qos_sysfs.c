@@ -96,7 +96,9 @@ int qos_add_interface(struct device *dev)
 	return sysfs_create_group(&dev->kobj, &qos_attr_group);
 }
 
+#if 0
 void qos_remove_interface(struct device *dev)
 {
 	sysfs_remove_group(&dev->kobj, &qos_attr_group);
 }
+#endif

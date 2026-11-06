@@ -444,10 +444,12 @@ int ccu_uninit_hw(struct ccu_device_s *device)
 	return 0;
 }
 
+#if 0
 int ccu_mmap_hw(struct file *filp, struct vm_area_struct *vma)
 {
 	return 0;
 }
+#endif
 
 int ccu_memcpy(void *dest, void *src, int length)
 {
@@ -462,6 +464,7 @@ int ccu_memcpy(void *dest, void *src, int length)
 	return length;
 }
 
+#if 0
 int ccu_memclr(void *dest, int length)
 {
 	int i = 0;
@@ -473,6 +476,7 @@ int ccu_memclr(void *dest, int length)
 
 	return length;
 }
+#endif
 
 int ccu_send_command(struct ccu_cmd_s *pCmd)
 {

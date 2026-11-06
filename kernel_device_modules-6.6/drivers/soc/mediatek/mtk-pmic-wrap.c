@@ -3336,11 +3336,13 @@ static void pwrap_sw_monitor_clr(void)
 	}
 }
 
+#if 0
 void pwrap_dump_and_recovery(void)
 {
 	pwrap_dump_ap_register();
 	pwrap_dump_pmic_register();
 }
+#endif
 
 static u32 pwrap_readl(struct pmic_wrapper *wrp, enum pwrap_regs reg)
 {
@@ -3559,10 +3561,12 @@ static int pwrap_read32(struct pmic_wrapper *wrp, u32 adr, u32 *rdata)
 	return 0;
 }
 
+#if 0
 int pwrap_read_hal(struct pmic_wrapper *wrp, u32 adr, u32 *rdata)
 {
 	return wrp->slave->pwrap_read(wrp, adr, rdata);
 }
+#endif
 
 static int pwrap_read(struct pmic_wrapper *wrp, u32 adr, u32 *rdata)
 {
@@ -3619,10 +3623,12 @@ static int pwrap_write32(struct pmic_wrapper *wrp, u32 adr, u32 wdata)
 	return 0;
 }
 
+#if 0
 int pwrap_write_hal(struct pmic_wrapper *wrp, u32 adr, u32 wdata)
 {
 	return wrp->slave->pwrap_write(wrp, adr, wdata);
 }
+#endif
 
 static int pwrap_write(struct pmic_wrapper *wrp, u32 adr, u32 wdata)
 {
@@ -4990,6 +4996,7 @@ static const struct of_device_id of_pwrap_match_tbl[] = {
 };
 MODULE_DEVICE_TABLE(of, of_pwrap_match_tbl);
 
+#if 0
 struct regmap *pwrap_node_to_regmap(struct device_node *np)
 {
 	struct platform_device *pdev;
@@ -5005,6 +5012,7 @@ struct regmap *pwrap_node_to_regmap(struct device_node *np)
 	return wrp->regmap;
 }
 EXPORT_SYMBOL_GPL(pwrap_node_to_regmap);
+#endif
 
 /********************************************************************/
 /* return value : EINT_STA: [0]: CPU IRQ status in PMIC1 */

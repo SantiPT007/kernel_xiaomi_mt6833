@@ -69,6 +69,7 @@ const char *irq_to_name(int irq)
 	return NULL;
 }
 
+#if 0
 const void *irq_to_handler(int irq)
 {
 	struct irq_desc *desc;
@@ -79,6 +80,7 @@ const void *irq_to_handler(int irq)
 		return (void *)desc->action->handler;
 	return NULL;
 }
+#endif
 
 #if !IS_ENABLED(CONFIG_ARM64)
 const int desc_to_ipi_type(struct irq_desc *desc)
