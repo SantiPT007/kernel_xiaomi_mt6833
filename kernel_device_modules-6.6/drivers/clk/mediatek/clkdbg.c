@@ -43,11 +43,9 @@
 
 #define genpd_is_irq_safe(genpd)	(genpd->flags & GENPD_FLAG_IRQ_SAFE)
 
-#if 0
 void __attribute__((weak)) clkdbg_set_cfg(void)
 {
 }
-#endif
 
 static const struct clkdbg_ops *clkdbg_ops;
 

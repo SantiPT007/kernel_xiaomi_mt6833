@@ -255,12 +255,10 @@ int __weak sync_dcm_set_mp1_freq(unsigned int mhz)
 	return 0;
 }
 
-#if 0
 int __weak sync_dcm_set_mp2_freq(unsigned int mhz)
 {
 	return 0;
 }
-#endif
 
 int __weak sync_dcm_set_cci_freq(unsigned int mhz)
 {
