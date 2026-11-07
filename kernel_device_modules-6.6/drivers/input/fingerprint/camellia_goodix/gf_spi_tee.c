@@ -1938,7 +1938,7 @@ static int gf_probe(struct spi_device *spi)
 	gf_spi_read_bytes(gf_dev, 0x0000, 4, rx_test);
 	printk("%s rx_test chip id:0x%x 0x%x 0x%x 0x%x \n", __func__, rx_test[0], rx_test[1], rx_test[2], rx_test[3]);
 	if (1) {
-		if (0 && ((rx_test[0] != 0x07) || (rx_test[3] != 0x25)) && ((rx_test[0] != 0x08) || (rx_test[3] != 0x25)) && ((rx_test[0] != 0x10) || (rx_test[3] != 0x25))) {
+		if (((rx_test[0] != 0x07) || (rx_test[3] != 0x25)) && ((rx_test[0] != 0x08) || (rx_test[3] != 0x25)) && ((rx_test[0] != 0x10) || (rx_test[3] != 0x25))) {
 			goodix_fp_exist = false;
 			gf_debug(ERR_LOG, "%s, get goodix FP sensor chipID fail!!\n", __func__);
 			//goto err_readid;
@@ -2241,6 +2241,8 @@ static int __init gf_init(void)
 		return -EINVAL;
 	}
 
+	fpc1022_init();
+
 	FUNC_EXIT();
 	return status;
 }
@@ -2249,6 +2251,7 @@ late_initcall(gf_init);
 static void __exit gf_exit(void)
 {
 	FUNC_ENTRY();
+	fpc1022_exit();
 	spi_unregister_driver(&gf_spi_driver);
 	FUNC_EXIT();
 }

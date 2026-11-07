@@ -29,6 +29,7 @@
 };
 
 &goodix_fp {
+	compatible = "mediatek,fpc1022_irq", "mediatek,goodix-fp";
 	fpc,gpio_irq = <&pio 22 0>;
 	interrupt-parent = <&pio>;
 	interrupts = <22 IRQ_TYPE_EDGE_FALLING>;
