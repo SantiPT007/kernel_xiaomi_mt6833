@@ -1879,6 +1879,9 @@ static int mtk_spi_probe(struct platform_device *pdev)
 
 	mdata->spi_clk_hz = clk_get_rate(mdata->spi_clk);
 
+	if (!clk_prepare_enable(mdata->spi_clk))
+		clk_disable_unprepare(mdata->spi_clk);
+
 	spin_lock_init(&mdata->eh_spi_lock);
 
 	ret = of_property_read_string_index(pdev->dev.of_node, "clock-source-type",

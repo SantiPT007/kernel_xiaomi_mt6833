@@ -33,6 +33,7 @@
 
 	aliases {
 		serial0 = &apuart0;
+		serial1 = &apuart1;
 		i2c0 = &i2c0;
 		i2c1 = &i2c1;
 		i2c2 = &i2c2;
