@@ -2049,6 +2049,7 @@ static int __init thermal_monitor_init(void)
 		mtk_thermal_pm_init();
 #endif
 		tscpu_init();
+		mtk_cooler_camellia_init();
 		mtktspmic_init();
 		mt6359vcore_init();
 		mt6359vproc_init();
@@ -2087,6 +2088,7 @@ static void __exit thermal_monitor_exit(void)
 	mtk_cooler_mutt_exit();
 	mtk_cooler_sysrst_exit();
 	mtk_cooler_VR_FPS_exit();
+	mtk_cooler_camellia_exit();
 #if defined(LVTS_CPU_PM_NTFY_CALLBACK)
 	mtk_thermal_pm_exit();
 #endif
