@@ -26,10 +26,7 @@ static void mtk_dvfsrc_legacy_start(struct device *dev)
 
 	arm_smccc_smc(MTK_SIP_LEGACY_SPM_VCOREFS_ARGS, LEGACY_VCOREFS_SMC_CMD_FW_STATUS,
 		0, 0, 0, 0, 0, 0, &ares);
-	if (ares.a0 && ares.a0 != (unsigned long)SMCCC_RET_NOT_SUPPORTED) {
-		dev_info(dev, "legacy ATF: SPM vcorefs firmware already running\n");
-		return;
-	}
+	dev_info(dev, "legacy ATF: SPM vcorefs firmware status %ld\n", (long)ares.a0);
 	arm_smccc_smc(MTK_SIP_LEGACY_SPM_VCOREFS_ARGS, LEGACY_VCOREFS_SMC_CMD_INIT,
 		0, 0, 0, 0, 0, 0, &ares);
 	arm_smccc_smc(MTK_SIP_LEGACY_SPM_VCOREFS_ARGS, LEGACY_VCOREFS_SMC_CMD_FLAGS,
