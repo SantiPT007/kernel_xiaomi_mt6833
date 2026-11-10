@@ -2677,7 +2677,7 @@ static int tscpu_thermal_probe(struct platform_device *dev)
 
 static int get_gpu_power_info(void)
 {
-#if IS_ENABLED(CONFIG_MTK_GPU_MT6768_SUPPORT)
+#if IS_ENABLED(CONFIG_MTK_GPU_MT6768_SUPPORT) || IS_ENABLED(CONFIG_MTK_GPU_MT6833_SUPPORT)
 	int num, i = 0;
 	struct mt_gpufreq_power_table_info *freqs;
 
