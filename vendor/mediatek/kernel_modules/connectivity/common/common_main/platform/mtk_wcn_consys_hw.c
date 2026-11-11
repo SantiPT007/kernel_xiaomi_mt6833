@@ -409,6 +409,9 @@ static INT32 mtk_wmt_probe(struct platform_device *pdev)
 	if (wmt_allocate_connsys_emi(pdev) < 0)
 		wmt_allocate_connsys_emi_by_lk2(pdev);
 
+	if (gConEmiPhyBase && wmt_consys_ic_ops->consys_ic_emi_mpu_set_region_protection)
+		wmt_consys_ic_ops->consys_ic_emi_mpu_set_region_protection();
+
 	wmt_thermal_register(pdev);
 
 	if (wmt_consys_ic_ops->consys_ic_need_store_pdev) {
