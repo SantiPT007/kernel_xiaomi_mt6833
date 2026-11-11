@@ -1201,6 +1201,12 @@ struct platform_device *vcu_get_plat_device(struct platform_device *pdev)
 		return NULL;
 	}
 
+	if (!platform_get_drvdata(vcu_pdev)) {
+		put_device(&vcu_pdev->dev);
+		of_node_put(vcu_node);
+		return NULL;
+	}
+
 	return vcu_pdev;
 }
 EXPORT_SYMBOL_GPL(vcu_get_plat_device);
