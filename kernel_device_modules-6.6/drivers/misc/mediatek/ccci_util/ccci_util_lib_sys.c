@@ -259,9 +259,8 @@ static ssize_t kcfg_setting_show(char *buf)
 	} else if (actual_write >= 4096 - 16 - curr)
 		actual_write = 4096 - 16 - curr - 1;
 	curr += actual_write;
-	/* Reserve 16 byte to store size info */
 	actual_write = snprintf(&buf[curr], 4096 - 16 - curr,
-		"[modem en]:%c\n", md_en);
+		"[modem en]:%c-0-0-0-0\n", md_en);
 	if (actual_write < 0) {
 		CCCI_UTIL_ERR_MSG(
 			"%s-%d:snprintf fail,actual_write=%d\n",
