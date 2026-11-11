@@ -395,7 +395,7 @@ static int __init mrdump_panic_init(void)
 	rmem_node = of_find_compatible_node(NULL, NULL, DEBUG_COMPATIBLE);
 	if (!rmem_node) {
 		pr_info("[mrdump] no node for reserved memory\n");
-		return -EINVAL;
+		return 0;
 	}
 
 	rmem = of_reserved_mem_lookup(rmem_node);
