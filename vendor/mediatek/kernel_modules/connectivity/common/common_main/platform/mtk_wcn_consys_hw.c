@@ -409,9 +409,6 @@ static INT32 mtk_wmt_probe(struct platform_device *pdev)
 	if (wmt_allocate_connsys_emi(pdev) < 0)
 		wmt_allocate_connsys_emi_by_lk2(pdev);
 
-	if (gConEmiPhyBase && wmt_consys_ic_ops->consys_ic_emi_mpu_set_region_protection)
-		wmt_consys_ic_ops->consys_ic_emi_mpu_set_region_protection();
-
 	wmt_thermal_register(pdev);
 
 	if (wmt_consys_ic_ops->consys_ic_need_store_pdev) {
@@ -431,6 +428,13 @@ static INT32 mtk_wmt_probe(struct platform_device *pdev)
 	if (iRet)
 		return iRet;
 
+	if (gConEmiPhyBase) {
+		if (wmt_consys_ic_ops->consys_ic_hw_reset_bit_set)
+			wmt_consys_ic_ops->consys_ic_hw_reset_bit_set(ENABLE);
+		if (wmt_consys_ic_ops->consys_ic_emi_mpu_set_region_protection)
+			wmt_consys_ic_ops->consys_ic_emi_mpu_set_region_protection();
+	}
+
 	if (wmt_consys_ic_ops->consys_ic_clk_get_from_dts)
 		iRet = wmt_consys_ic_ops->consys_ic_clk_get_from_dts(pdev);
 	else
@@ -440,10 +444,6 @@ static INT32 mtk_wmt_probe(struct platform_device *pdev)
 		return iRet;
 
 	if (gConEmiPhyBase) {
-		/* set emi mpu permission before access it */
-		if (wmt_consys_ic_ops->consys_ic_emi_mpu_set_region_protection)
-			wmt_consys_ic_ops->consys_ic_emi_mpu_set_region_protection();
-
 		pConnsysEmiStart = ioremap(gConEmiPhyBase, gConEmiSize);
 		WMT_PLAT_PR_INFO("Clearing Connsys EMI (virtual(0x%p) physical(0x%pa)) %llu bytes\n",
 				   pConnsysEmiStart, &gConEmiPhyBase, gConEmiSize);
