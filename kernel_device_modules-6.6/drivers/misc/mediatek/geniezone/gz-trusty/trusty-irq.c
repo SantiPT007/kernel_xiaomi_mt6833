@@ -726,6 +726,7 @@ static const struct of_device_id trusty_irq_of_match[] = {
 	{ .compatible = "android,trusty-irq-v1", },
 	{},
 };
+MODULE_DEVICE_TABLE(of, trusty_irq_of_match);
 
 static struct platform_driver trusty_irq_driver = {
 	.probe = trusty_irq_probe,
