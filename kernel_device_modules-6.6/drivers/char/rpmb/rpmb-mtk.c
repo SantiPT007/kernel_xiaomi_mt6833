@@ -2763,6 +2763,8 @@ static long rpmb_ioctl_ufs_soter(unsigned int cmd, unsigned long arg)
 			size, RPMB_DATA_BUFF_SIZE);
 		return -EINVAL;
 	}
+	if (cmd == RPMB_IOCTL_SOTER_SET_KEY && size < RPMB_ONE_FRAME_SIZE)
+		return -EINVAL;
 
 	mutex_lock(&rpmb_soter_lock);
 	if (copy_from_user(rpmb_buffer, (void __user *)arg, 4 + size)) {

@@ -1625,6 +1625,8 @@ static int ufs_mtk_init(struct ufs_hba *hba)
 
 	if (device_rename(dev, "bootdevice"))
 		dev_info(dev, "%s: rename to bootdevice failed\n", __func__);
+	else
+		to_platform_device(dev)->name = dev_name(dev);
 
 	atag = (struct tag_ufs *)ufs_mtk_get_boot_property(dev->of_node,
 			"atag,ufs", NULL);

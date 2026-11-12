@@ -650,6 +650,14 @@
 		vsys_watt = <5000000>;
 };
 
+&lk_charger {
+	ac_charger_input_current = <2050000>;
+};
+
+&mt6360_chg {
+	ieoc = <200000>;
+};
+
 &utos {
 	microtrust,real-drv = <1>;
 };

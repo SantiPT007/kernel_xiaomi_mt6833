@@ -588,13 +588,13 @@ int __gpufreq_get_idx_by_pgpu(unsigned int power)
 	int oppidx = -1;
 	int i = 0;
 
-	/* find the smallest index that satisfy given power */
 	for (i = g_gpu.min_oppidx; i >= g_gpu.max_oppidx; i--) {
-		if (g_gpu.working_table[i].power >= power)
+		if (g_gpu.working_table[i].power > power)
 			break;
 	}
-	/* use max_oppidx if not found */
-	oppidx = (i > g_gpu.max_oppidx) ? i : g_gpu.max_oppidx;
+	oppidx = i + 1;
+	if (oppidx > g_gpu.min_oppidx)
+		oppidx = g_gpu.min_oppidx;
 
 	return oppidx;
 }

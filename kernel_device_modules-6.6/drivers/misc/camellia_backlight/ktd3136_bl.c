@@ -24,6 +24,7 @@
 
 struct ktd3137_chip *bkl_chip;
 static int ktd_pending_brightness = -1;
+static DEFINE_MUTEX(ktd_pending_lock);
 int ktd_hbm_mode;
 
 #define KTD_DEBUG
@@ -750,10 +751,13 @@ int ktd3137_brightness_set(int brightness)
 {
 	LOG_DBG("%s brightness = %d\n", __func__, brightness);
 
+	mutex_lock(&ktd_pending_lock);
 	if (!bkl_chip) {
 		ktd_pending_brightness = brightness;
+		mutex_unlock(&ktd_pending_lock);
 		return brightness;
 	}
+	mutex_unlock(&ktd_pending_lock);
 	ktd3137_brightness_set_workfunc(bkl_chip, brightness);
 	return brightness;
 }
@@ -1129,7 +1133,7 @@ struct device *ktd3137_device_create(void *drvdata, const char *fmt)
 static int ktd3137_probe(struct i2c_client *client)
 {
 
-	int err = 0;
+	int err = 0, pending;
 	u8 value;
 
 	struct ktd3137_bl_pdata *pdata = dev_get_drvdata(&client->dev);
@@ -1196,9 +1200,12 @@ static int ktd3137_probe(struct i2c_client *client)
 	ktd3137_read_reg(chip->client, 0x08, &value);
 	ktd3137_read_reg(chip->client, 0x0A, &value);
 	//backlight_update_status(chip->bl);
+	mutex_lock(&ktd_pending_lock);
 	bkl_chip = chip;
-	if (ktd_pending_brightness >= 0)
-		ktd3137_brightness_set_workfunc(chip, ktd_pending_brightness);
+	pending = ktd_pending_brightness;
+	mutex_unlock(&ktd_pending_lock);
+	if (pending >= 0)
+		ktd3137_brightness_set_workfunc(chip, pending);
 exit0:
 	return err;
 }
