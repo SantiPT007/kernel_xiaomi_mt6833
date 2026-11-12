@@ -45,6 +45,7 @@
 	mt6360pd,intr-gpio-num = <9>;
 	mt6360pd,intr-gpio = <&pio 9 0x0>;
 	mt-tcpc,role-def = <5>;
+	mt-tcpc,disable-pe;
 };
 
 &spi4 {
