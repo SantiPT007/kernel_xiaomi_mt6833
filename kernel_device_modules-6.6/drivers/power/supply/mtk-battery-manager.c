@@ -1157,7 +1157,7 @@ static int bs_psy_get_property(struct power_supply *psy,
 			if(!bm->gm2->bat_plug_out)
 				curr_now += bm_update_psy_property(bm->gm2, CURRENT_NOW);
 
-		val->intval = curr_now * 100;
+		val->intval = -curr_now * 100;
 		ret = 0;
 		break;
 	case POWER_SUPPLY_PROP_CURRENT_AVG:
