@@ -270,6 +270,7 @@ static int emibus_icc_probe(struct platform_device *pdev)
 	provider->xlate = of_icc_xlate_onecell;
 	INIT_LIST_HEAD(&provider->nodes);
 	provider->data = data;
+	data->num_nodes = num_nodes;
 	provider->get_bw = emibus_icc_get_bw;
 
 	icc_provider_init(provider);
@@ -290,7 +291,6 @@ static int emibus_icc_probe(struct platform_device *pdev)
 
 		data->nodes[i] = node;
 	}
-	data->num_nodes = num_nodes;
 
 	ret = icc_provider_register(provider);
 	if (ret)
