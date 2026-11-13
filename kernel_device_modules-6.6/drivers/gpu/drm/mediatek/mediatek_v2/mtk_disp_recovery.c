@@ -38,7 +38,6 @@
 
 
 #define ESD_TRY_CNT 5
-#define ESD_CHK_TRY_CNT 5
 #define ESD_CHECK_PERIOD 2000 /* ms */
 #define esd_timer_to_mtk_crtc(x) container_of(x, struct mtk_drm_crtc, esd_timer)
 
@@ -265,17 +264,6 @@ int _mtk_esd_check_read(struct drm_crtc *crtc)
 		mtk_disp_mutex_trigger(mtk_crtc->mutex[0], cmdq_handle);
 		mtk_ddp_comp_io_cmd(output_comp, cmdq_handle, COMP_REG_START,
 				    NULL);
-		if (atomic_read(&esd_ctx->target_time) == 0) {
-			if (esd_ctx->chk_retry < ESD_CHK_TRY_CNT) {
-				esd_ctx->chk_retry++;
-				ret = 0;
-				DDPINFO("%s: miss target line, retry count:%u\n",
-					__func__, esd_ctx->chk_retry);
-				goto done;
-			}
-			DDPMSG("%s: miss target line, retry timeout:%u\n",
-				__func__, esd_ctx->chk_retry);
-		}
 	}
 	esd_ctx->chk_retry = 0;
 	esd_ctx->chk_sta = 0;
