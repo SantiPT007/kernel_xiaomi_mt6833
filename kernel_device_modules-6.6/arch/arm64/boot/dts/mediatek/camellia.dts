@@ -655,6 +655,10 @@
 	ac_charger_input_current = <2050000>;
 };
 
+&smi_disp_common {
+	mmdvfs-dvfsrc-vcore-supply = <&dvfsrc_vcore>;
+};
+
 &mt6360_chg {
 	ieoc = <200000>;
 	vrechg = <200000>;
