@@ -27,29 +27,6 @@ static int is_perf_fist;
 #define ACT_CORE(cluster)	(active_core[PPM_CLUSTER_##cluster])
 #define CORE_LIMIT(cluster)	(core_limit_tmp[PPM_CLUSTER_##cluster])
 
-#if 0
-struct ppm_cobra_data *ppm_cobra_pass_tbl(void)
-{
-	if (cobra_init_done)
-		return cobra_tbl;
-	return NULL;
-}
-#endif
-
-#if 0
-int eara_is_perf_first(void)
-{
-	return is_perf_fist;
-}
-#endif
-
-#if 0
-void eara_pass_perf_first_hint(int enable)
-{
-	is_perf_fist = enable;
-}
-#endif
-
 static unsigned int get_idx_in_pwr_tbl(enum ppm_cluster cluster)
 {
 	unsigned int idx = 0;

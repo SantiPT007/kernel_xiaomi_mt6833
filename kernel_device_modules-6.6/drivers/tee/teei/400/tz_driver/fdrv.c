@@ -81,14 +81,6 @@ free_memory:
 	return retVal;
 }
 
-#if 0
-void register_fdrv(struct teei_fdrv *fdrv)
-{
-	list_add_tail(&fdrv->list, &fdrv_list);
-}
-EXPORT_SYMBOL(register_fdrv);
-#endif
-
 int fdrv_notify(struct teei_fdrv *fdrv)
 {
 	struct completion *wait_completion = NULL;

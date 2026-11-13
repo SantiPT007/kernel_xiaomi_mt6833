@@ -360,12 +360,3 @@ VOID stp_drv_exit(VOID)
 #endif
 }
 
-#if 0
-INT32 mtk_wcn_stp_sdio_wake_up_ctrl(MTK_WCN_HIF_SDIO_CLTCTX ctx)
-{
-	stp_sdio_wake_up_ctrl(ctx);
-	return 0;
-}
-EXPORT_SYMBOL(mtk_wcn_stp_sdio_wake_up_ctrl);
-#endif
-

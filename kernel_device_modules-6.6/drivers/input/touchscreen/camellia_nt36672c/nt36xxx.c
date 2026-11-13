@@ -503,15 +503,6 @@ Description:
 return:
 	n.a.
 *******************************************************/
-#if 0
-void nvt_sw_reset(void)
-{
-	//---software reset cmds to SWRST_N8_ADDR---
-	nvt_write_addr(SWRST_N8_ADDR, 0x55);
-
-	msleep(10);
-}
-#endif
 
 /*******************************************************
 Description:

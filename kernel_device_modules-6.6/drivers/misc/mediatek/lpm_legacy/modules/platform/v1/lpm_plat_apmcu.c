@@ -106,31 +106,6 @@ static void _lpm_plat_inc_pwr_cnt(struct lpm_device *dev,
 		_lpm_plat_inc_pwr_cnt(dev->parent, lvl);
 }
 
-#if 0
-static void _lpm_plat_dec_pwr_cnt(struct lpm_device *dev,
-					unsigned int lvl)
-{
-	unsigned int lvl_cnt;
-
-	lvl_cnt = lvl & dev->pwr_lvl_mask;
-
-	if (!lvl_cnt)
-		return;
-
-	/**
-	 * Exclusive read-modify-write is ensured by
-	 *     lpm_mod_locker in idle flow
-	 *     lpm_plat_qos_req in hot-plug flow
-	 */
-	dev->pwr_on.lvl -= lvl_cnt;
-
-	CHK((dev->pwr_on.lvl & BIT(31)));
-
-	if (dev->parent)
-		_lpm_plat_dec_pwr_cnt(dev->parent, lvl);
-}
-#endif
-
 #define lpm_plat_set_off_lvl(cpu, lvl)				\
 do {									\
 	if (likely(cpu < nr_cpu_ids))					\
@@ -142,34 +117,6 @@ do {									\
 	if (likely(cpu < nr_cpu_ids))					\
 		_lpm_plat_inc_pwr_cnt(&lp_dev_cpu[cpu], lvl);	\
 } while (0)
-
-#if 0
-void lpm_plat_set_mcusys_off(int cpu)
-{
-	lpm_plat_set_off_lvl(cpu, MCUSYS_LVL);
-}
-#endif
-
-#if 0
-void lpm_plat_clr_mcusys_off(int cpu)
-{
-	lpm_plat_clr_off_lvl(cpu, MCUSYS_LVL);
-}
-#endif
-
-#if 0
-void lpm_plat_set_cluster_off(int cpu)
-{
-	lpm_plat_set_off_lvl(cpu, CLUSTER_LVL);
-}
-#endif
-
-#if 0
-void lpm_plat_clr_cluster_off(int cpu)
-{
-	lpm_plat_clr_off_lvl(cpu, CLUSTER_LVL);
-}
-#endif
 
 static inline void lpm_dev_get_cpus_online(void)
 {
@@ -191,23 +138,6 @@ static void lpm_dev_set_cpus_off(void)
 	for (i = 0; i < nr_cpu_ids; i++)
 		lp_dev_cpu[i].pwr_on.lvl = 0;
 }
-
-#if 0
-bool lpm_plat_is_mcusys_off(void)
-{
-	return !lp_dev_mcusys.pwr_on.mcusys;
-}
-#endif
-
-#if 0
-bool lpm_plat_is_cluster_off(int cpu)
-{
-	if (unlikely(cpu < 0 || cpu >= nr_cpu_ids || !lp_dev_cpu[cpu].parent))
-		return false;
-
-	return !lp_dev_cpu[cpu].parent->pwr_on.cluster;
-}
-#endif
 
 static int __lpm_cpuhp_notify_enter(unsigned int type, unsigned int cpu)
 {

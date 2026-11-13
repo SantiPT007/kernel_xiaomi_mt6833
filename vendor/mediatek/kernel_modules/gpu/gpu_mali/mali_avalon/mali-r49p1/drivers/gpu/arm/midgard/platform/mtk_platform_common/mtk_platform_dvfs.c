@@ -105,34 +105,6 @@ void mtk_common_update_gpu_utilization(void)
 #endif
 }
 
-#if 0
-int mtk_common_get_util_active(void)
-{
-	return current_util_active;
-}
-#endif
-
-#if 0
-int mtk_common_get_util_3d(void)
-{
-	return current_util_3d;
-}
-#endif
-
-#if 0
-int mtk_common_get_util_ta(void)
-{
-	return current_util_ta;
-}
-#endif
-
-#if 0
-int mtk_common_get_util_compute(void)
-{
-	return current_util_compute;
-}
-#endif
-
 #if IS_ENABLED(CONFIG_MALI_MTK_DVFS_LOADING_MODE)
 void mtk_common_cal_gpu_utilization_ex(unsigned int *pui32Loading,
                                        unsigned int *pui32Block,

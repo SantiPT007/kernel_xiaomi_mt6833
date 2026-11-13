@@ -3025,15 +3025,6 @@ static void spm_resource_req_usb(unsigned int user, unsigned int req_mask)
 }
 #endif
 
-#if 0
-void register_spm_resource_req_func(bool (*spm_resource_req_func)(unsigned int user,
-								unsigned int req_mask))
-{
-	spm_resource_req_fptr = spm_resource_req_func;
-}
-EXPORT_SYMBOL(register_spm_resource_req_func);
-#endif
-
 #ifndef FPGA_PLATFORM
 static void usb_spm_dpidle_request(int mode)
 {
@@ -3925,15 +3916,6 @@ static bool musb_hal_is_vbus_exist(void)
 }
 
 /* be aware this could not be used in non-sleep context */
-#if 0
-bool usb_cable_connected(struct musb *musb)
-{
-	if (musb->usb_connected)
-		return true;
-	else
-		return false;
-}
-#endif
 
 static bool cmode_effect_on(void)
 {

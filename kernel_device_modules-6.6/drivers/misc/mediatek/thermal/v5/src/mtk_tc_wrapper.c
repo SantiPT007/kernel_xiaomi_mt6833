@@ -76,13 +76,6 @@ void set_tscpu_init_done(int complete)
 	tscpu_init_done = complete;
 }
 
-#if 0
-int get_immediate_none_wrap(void)
-{
-	return -127000;
-}
-#endif
-
 /* chip dependent */
 int get_immediate_cpuL_wrap(void)
 {
@@ -439,14 +432,6 @@ int get_immediate_tslvts4_2_wrap(void)
 
 
 
-#endif
-
-#if 0
-int get_immediate_tsabb_wrap(void)
-{
-
-	return 0;
-}
 #endif
 
 int (*get_immediate_tsX[TS_ENUM_MAX])(void) = {

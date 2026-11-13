@@ -385,27 +385,11 @@ unsigned int apthermolmt_get_cpu_power_limit(void)
 }
 EXPORT_SYMBOL(apthermolmt_get_cpu_power_limit);
 
-#if 0
-unsigned int apthermolmt_get_cpu_min_power(void)
-{
-	return tscpu_get_min_cpu_pwr();
-}
-EXPORT_SYMBOL(apthermolmt_get_cpu_min_power);
-#endif
-
 unsigned int apthermolmt_get_gpu_power_limit(void)
 {
 	return apthermolmt_curr_gpu_pwr_lim;
 }
 EXPORT_SYMBOL(apthermolmt_get_gpu_power_limit);
-
-#if 0
-unsigned int apthermolmt_get_gpu_min_power(void)
-{
-	return tscpu_get_min_gpu_pwr();
-}
-EXPORT_SYMBOL(apthermolmt_get_gpu_min_power);
-#endif
 
 #if defined(THERMAL_VPU_SUPPORT)
 unsigned int apthermolmt_get_vpu_power_limit(void)

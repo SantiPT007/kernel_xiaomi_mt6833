@@ -26,19 +26,6 @@ static struct ppm_policy_data lcmoff_policy = {
 	.status_change_cb	= ppm_lcmoff_status_change_cb,
 };
 
-#if 0
-bool ppm_lcmoff_is_policy_activated(void)
-{
-	bool is_activate;
-
-	ppm_lock(&lcmoff_policy.lock);
-	is_activate = lcmoff_policy.is_activated;
-	ppm_unlock(&lcmoff_policy.lock);
-
-	return is_activate;
-}
-#endif
-
 static void ppm_lcmoff_update_limit_cb(void)
 {
 	unsigned int i;

@@ -292,27 +292,6 @@ static bool xhci_mtk_is_usb_audio(struct urb *urb)
 	return false;
 }
 
-#if 0
-int register_xhci_enum_mbrain_cb(xhci_enum_mbrain_callback cb)
-{
-	if (!cb)
-		return -EINVAL;
-
-	xhci_enum_mbrain_cb = cb;
-	return 0;
-}
-EXPORT_SYMBOL(register_xhci_enum_mbrain_cb);
-#endif
-
-#if 0
-int unregister_xhci_enum_mbrain_cb(void)
-{
-	xhci_enum_mbrain_cb = NULL ;
-	return 0;
-}
-EXPORT_SYMBOL(unregister_xhci_enum_mbrain_cb);
-#endif
-
 static void xhci_update_mbrain_work(struct work_struct *work)
 {
 	struct delayed_work *delayed_work = to_delayed_work(work);

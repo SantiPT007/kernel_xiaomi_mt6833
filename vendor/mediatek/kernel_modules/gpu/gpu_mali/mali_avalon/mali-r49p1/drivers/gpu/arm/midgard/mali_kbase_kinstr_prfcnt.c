@@ -2287,13 +2287,6 @@ free_buf:
 	return err;
 }
 
-#if 0
-void kbasep_vinstr_dump_worker(struct work_struct *work)
-{
-	return;
-}
-#endif
-
 /* MTK GPU PMU */
 void MTK_update_mtk_pm(int flag)
 {

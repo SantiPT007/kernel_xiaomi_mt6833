@@ -100,12 +100,6 @@ signed int fm_link_release(void)
  * @val - the pointer of target buf
  * If success, return 0; else error code
  */
-#if 0
-signed int fm_ctrl_rx(unsigned char addr, unsigned short *val)
-{
-	return 0;
-}
-#endif
 
 /*
  * fm_ctrl_tx
@@ -114,12 +108,6 @@ signed int fm_ctrl_rx(unsigned char addr, unsigned short *val)
  * @val - value will be writed in the rigister
  * If success, return 0; else error code
  */
-#if 0
-signed int fm_ctrl_tx(unsigned char addr, unsigned short val)
-{
-	return 0;
-}
-#endif
 
 /*
  * fm_cmd_tx() - send cmd to FM firmware and wait event
@@ -422,13 +410,6 @@ signed int fm_event_parser(signed int(*rds_parser) (struct rds_rx_t *, signed in
 
 	return 0;
 }
-
-#if 0
-bool fm_wait_stc_done(unsigned int sec)
-{
-	return true;
-}
-#endif
 
 signed int fm_force_active_event(unsigned int mask)
 {

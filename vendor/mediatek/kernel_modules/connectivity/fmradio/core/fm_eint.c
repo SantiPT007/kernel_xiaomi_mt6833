@@ -27,18 +27,6 @@ signed int fm_enable_eint(void)
 	return 0;
 }
 
-#if 0
-signed int fm_disable_eint(void)
-{
-	struct fm_ext_interface *ei = &fm_wcn_ops.ei;
-
-	if (ei->disable_eint)
-		ei->disable_eint();
-
-	return 0;
-}
-#endif
-
 signed int fm_request_eint(void (*parser) (void))
 {
 	struct fm_ext_interface *ei = &fm_wcn_ops.ei;

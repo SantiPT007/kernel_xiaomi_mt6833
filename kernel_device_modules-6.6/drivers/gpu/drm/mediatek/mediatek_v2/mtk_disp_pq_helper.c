@@ -516,38 +516,6 @@ int disp_pq_proxy_virtual_type_impl(struct drm_crtc *crtc, struct drm_device *de
 	return ret;
 }
 
-#if 0
-bool disp_pq_is_cmd_need_pm(enum mtk_pq_frame_cfg_cmd cmd)
-{
-	bool ret = true;
-
-	switch (cmd) {
-	case PQ_AAL_GET_HIST:
-	case PQ_AAL_GET_SIZE:
-	case PQ_CCORR_GET_IRQ:
-	case PQ_C3D_GET_IRQ:
-	case PQ_TDSHP_GET_SIZE:
-	case PQ_VIRTUAL_GET_IRQ:
-	case PQ_DBI_LOAD_PARAM:
-	case PQ_DBI_LOAD_TB:
-	case PQ_DBI_REMAP_CHG:
-	case PQ_DBI_GET_HW_ID:
-	case PQ_DBI_GET_WIDTH:
-	case PQ_DBI_GET_HEIGHT:
-	case PQ_DBI_GET_DBV:
-	case PQ_DBI_GET_FPS:
-	case PQ_DBI_GET_SCP:
-	case PQ_VIRTUAL_GET_PIXEL_TYPE_BY_FENCE:
-	case PQ_DBI_GET_SCP_LIFECYCLE:
-		ret = false;
-		break;
-	default:
-		break;
-	}
-	return ret;
-}
-#endif
-
 int disp_pq_proxy_kdata(struct drm_device *dev, struct drm_file *file_priv,
 	struct drm_crtc *crtc, unsigned int pq_cmd, void *kdata, unsigned int size)
 {

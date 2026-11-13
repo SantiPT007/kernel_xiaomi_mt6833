@@ -87,16 +87,6 @@ static void ppm_userlimit_status_change_cb(bool enable)
 	FUNC_EXIT(FUNC_LV_POLICY);
 }
 
-#if 0
-unsigned int mt_ppm_userlimit_cpu_core(unsigned int cluster_num,
-	struct ppm_limit_data *data)
-{
-	/* phase-out */
-
-	return 0;
-}
-#endif
-
 unsigned int mt_ppm_userlimit_cpu_freq(
 	unsigned int cluster_num, struct ppm_limit_data *data)
 {

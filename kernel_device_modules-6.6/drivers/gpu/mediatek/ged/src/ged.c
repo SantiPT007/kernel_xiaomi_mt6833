@@ -26,29 +26,6 @@ void ged_notification(GED_NOTIFICATION_TYPE eType)
 	}
 }
 EXPORT_SYMBOL(ged_notification);
-#if 0
-int ged_set_target_fps(unsigned int target_fps, int mode)
-{
-	return 0;
-}
-EXPORT_SYMBOL(ged_set_target_fps);
-#endif
-#if 0
-void ged_get_latest_perf_state(long long *t_cpu_remained,
-				long long *t_gpu_remained,
-				long *t_cpu_target,
-				long *t_gpu_target)
-{
-	ged_kpi_get_latest_perf_state(t_cpu_remained,
-		t_gpu_remained, t_cpu_target, t_gpu_target);
-}
-#endif
-#if 0
-unsigned int ged_get_cur_fps(void)
-{
-	return ged_kpi_get_cur_fps();
-}
-#endif
 
 #ifndef MTK_GPU_DVFS
 /*

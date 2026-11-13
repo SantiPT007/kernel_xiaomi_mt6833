@@ -140,20 +140,6 @@ static struct clk *__clk_dbg_lookup(const char *name)
 	return NULL;
 }
 
-#if 0
-static void print_fclk_freq(const struct fmeter_clk *fclk, u32 freq, void *data)
-{
-	pr_dbg("%2d: %-29s: %d\n", fclk->id, fclk->name, freq);
-}
-#endif
-
-#if 0
-void print_fmeter_all(void)
-{
-	proc_all_fclk_freq(print_fclk_freq, NULL);
-}
-#endif
-
 static void seq_print_fclk_freq(const struct fmeter_clk *fclk,
 				u32 freq, void *data)
 {
@@ -181,24 +167,6 @@ static void proc_all_regname(fn_regname_proc proc, void *data)
 	for (; rn->base != NULL; rn++)
 		proc(rn, data);
 }
-
-#if 0
-static void print_reg(const struct regname *rn, void *data)
-{
-	if (!is_valid_reg(ADDR(rn)))
-		return;
-
-	pr_dbg("%-21s: [0x%08x][0x%p] = 0x%08x\n",
-			rn->name, PHYSADDR(rn), ADDR(rn), clk_readl(ADDR(rn)));
-}
-#endif
-
-#if 0
-void print_regs(void)
-{
-	proc_all_regname(print_reg, NULL);
-}
-#endif
 
 static int clkdbg_pvdck_is_on(struct provider_clk *pvdck)
 {
@@ -299,13 +267,6 @@ static int clkdbg_dump_muxes(struct seq_file *s, void *v)
 }
 
 static char last_cmd[128] = "null";
-
-#if 0
-const char *get_last_cmd(void)
-{
-	return last_cmd;
-}
-#endif
 
 static void proc_fclk_freq(fn_fclk_freq_proc proc, void *data)
 {

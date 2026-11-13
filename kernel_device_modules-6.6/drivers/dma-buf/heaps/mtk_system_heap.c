@@ -1714,14 +1714,6 @@ const char *refill_heap_names[] = {
 	NULL,
 };
 
-#if 0
-const char **mtk_refill_heap_names(void)
-{
-	return &refill_heap_names[0];
-}
-EXPORT_SYMBOL_GPL(mtk_refill_heap_names);
-#endif
-
 /* ref code: dma_buf.c, dma_buf_set_name */
 long mtk_dma_buf_set_name(struct dma_buf *dmabuf, const char *buf)
 {
@@ -1756,62 +1748,8 @@ int is_system_heap_dmabuf(const struct dma_buf *dmabuf)
 }
 EXPORT_SYMBOL_GPL(is_system_heap_dmabuf);
 
-#if 0
-int is_uncached_dmabuf(const struct dma_buf *dmabuf)
-{
-	struct system_heap_buffer *buffer;
-
-	if (IS_ERR_OR_NULL(dmabuf))
-		return 0;
-
-	buffer = dmabuf->priv;
-	if (IS_ERR_OR_NULL(buffer))
-		return 0;
-
-	return buffer->uncached;
-}
-EXPORT_SYMBOL_GPL(is_uncached_dmabuf);
-#endif
-
 hang_dump_cb hang_dump_proc;
 EXPORT_SYMBOL_GPL(hang_dump_proc);
-
-#if 0
-int mtk_dmaheap_register_slc_callback(dmaheap_slc_callback cb)
-{
-	//pr_info("%s slc_callback:0x%lx cb:0x%lx\n", __func__,
-	//	(unsigned long)slc_callback, (unsigned long)cb);
-	if (slc_callback)
-		return -EPERM;
-
-	slc_callback = cb;
-	return 0;
-}
-EXPORT_SYMBOL_GPL(mtk_dmaheap_register_slc_callback);
-#endif
-
-#if 0
-int mtk_dmaheap_unregister_slc_callback(void)
-{
-	slc_callback = NULL;
-	return 0;
-}
-EXPORT_SYMBOL_GPL(mtk_dmaheap_unregister_slc_callback);
-#endif
-
-#if 0
-int dma_buf_set_gid(struct dma_buf *dmabuf, int gid)
-{
-	struct system_heap_buffer *buffer = dmabuf->priv;
-
-	if (IS_ERR_OR_NULL(buffer))
-		return -EINVAL;
-
-	buffer->gid = gid;
-	return 0;
-}
-EXPORT_SYMBOL_GPL(dma_buf_set_gid);
-#endif
 
 int dma_buf_get_gid(struct dma_buf *dmabuf)
 {

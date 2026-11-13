@@ -232,61 +232,6 @@ void teei_cpus_read_unlock(void)
 		cpus_read_unlock();
 }
 
-#if 0
-void teei_cpus_write_lock(void)
-{
-#ifdef ISEE_FP_SINGLE_CHANNEL
-	cpus_write_lock();
-	teei_cpu_write_owner = current;
-#endif
-}
-#endif
-
-#if 0
-void teei_cpus_write_unlock(void)
-{
-#ifdef ISEE_FP_SINGLE_CHANNEL
-	teei_cpu_write_owner = NULL;
-	cpus_write_unlock();
-#endif
-}
-#endif
-
-#if 0
-struct tz_driver_state *get_tz_drv_state(void)
-{
-	return tz_drv_state;
-}
-#endif
-
-#if 0
-void *tz_malloc(size_t size, int flags)
-{
-	void *ptr = kmalloc(size, flags | GFP_ATOMIC);
-	return ptr;
-}
-#endif
-
-#if 0
-void *tz_malloc_shared_mem(size_t size, int flags)
-{
-#ifdef UT_DMA_ZONE
-	return (void *) __get_free_pages(flags | GFP_DMA,
-					get_order(ROUND_UP(size, SZ_4K)));
-#else
-	return (void *) __get_free_pages(flags,
-					get_order(ROUND_UP(size, SZ_4K)));
-#endif
-}
-#endif
-
-#if 0
-void tz_free_shared_mem(void *addr, size_t size)
-{
-	free_pages((unsigned long)addr, get_order(ROUND_UP(size, SZ_4K)));
-}
-#endif
-
 int teei_move_cpu_context(int target_cpu_id, int original_cpu_id)
 {
 	teei_secure_call(N_SWITCH_CORE, teei_cpu_id[target_cpu_id],

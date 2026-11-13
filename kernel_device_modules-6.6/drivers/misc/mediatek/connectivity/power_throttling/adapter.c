@@ -364,13 +364,6 @@ int conn_pwr_set_customer_level(enum conn_pwr_drv_type type, enum conn_pwr_low_b
 }
 EXPORT_SYMBOL(conn_pwr_set_customer_level);
 
-#if 0
-int conn_pwr_get_chip_id(void)
-{
-	return g_plat_info.chip_id;
-}
-#endif
-
 int conn_pwr_get_adie_id(void)
 {
 	return g_plat_info.adie_id;
@@ -610,21 +603,3 @@ int conn_pwr_deinit(void)
 	return 0;
 }
 EXPORT_SYMBOL(conn_pwr_deinit);
-
-#if 0
-int conn_pwr_resume(void)
-{
-	conn_pwr_core_resume();
-	return 0;
-}
-EXPORT_SYMBOL(conn_pwr_resume);
-#endif
-
-#if 0
-int conn_pwr_suspend(void)
-{
-	conn_pwr_core_suspend();
-	return 0;
-}
-EXPORT_SYMBOL(conn_pwr_suspend);
-#endif

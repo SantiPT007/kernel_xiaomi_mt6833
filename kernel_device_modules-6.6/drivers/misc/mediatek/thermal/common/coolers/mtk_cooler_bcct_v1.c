@@ -142,20 +142,6 @@ static int chrlmt_unregister(struct chrlmt_handle *handle)
 	return -1;
 }
 
-#if 0
-int clbcct_get_chr_curr_limit(void)
-{
-	return chrlmt_bat_chr_curr_limit;
-}
-#endif
-
-#if 0
-int clbcct_get_input_curr_limit(void)
-{
-	return chrlmt_chr_input_curr_limit;
-}
-#endif
-
 static void chrlmt_set_limit_handler(struct work_struct *work)
 {
 	union power_supply_propval prop;
@@ -1174,14 +1160,6 @@ static const struct proc_ops _cl_battery_status_fops = {
 	.proc_lseek = seq_lseek,
 	.proc_release = single_release,
 };
-
-#if 0
-int mtk_cooler_is_abcct_unlimit(void)
-{
-	return (cl_abcct_state == 0 &&  cl_abcct_lcmoff_state == 0) ? 1 : 0;
-}
-EXPORT_SYMBOL(mtk_cooler_is_abcct_unlimit);
-#endif
 
 
 int mtk_cooler_bcct_init(void)

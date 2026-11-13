@@ -64,15 +64,6 @@ void ged_free(void *pvBuf, int i32Size)
 	}
 }
 
-#if 0
-long ged_get_pid(void)
-{
-	if (in_interrupt())
-		return 0xffffffffL;
-	return (long)task_tgid_nr(current);
-}
-#endif
-
 unsigned long long ged_get_time(void)
 {
 	unsigned long long temp;

@@ -621,14 +621,6 @@ bool is_pkvm_enabled(void)
 }
 EXPORT_SYMBOL(is_pkvm_enabled);
 
-#if 0
-struct device *get_ssmr_dev(void)
-{
-	return sec_ssmr_dev;
-}
-EXPORT_SYMBOL(get_ssmr_dev);
-#endif
-
 bool is_ffa_enabled(void)
 {
 #if IS_ENABLED(CONFIG_ARM_FFA_TRANSPORT)

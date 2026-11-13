@@ -647,39 +647,6 @@ void mml_dev_put_dle_ctx(struct mml_dev *mml,
 	WARN_ON(cnt < 0);
 }
 
-#if 0
-struct mml_m2m_ctx *mml_dev_create_m2m_ctx(struct mml_dev *mml,
-	struct mml_m2m_ctx *(*ctx_create)(struct mml_dev *mml))
-{
-	struct mml_m2m_ctx *ctx;
-
-	mutex_lock(&mml->ctx_mutex);
-
-#if IS_ENABLED(CONFIG_VHOST_CMDQ)
-	cmdq_set_client(mml);
-#endif
-
-	create_dev_topology_locked(mml);
-	if (IS_ERR(mml->topology)) {
-		ctx = ERR_CAST(mml->topology);
-		goto exit;
-	}
-
-	ctx = ctx_create(mml);
-
-exit:
-	mutex_unlock(&mml->ctx_mutex);
-	return ctx;
-}
-#endif
-
-#if 0
-struct mml_v4l2_dev *mml_get_v4l2_dev(struct mml_dev *mml)
-{
-	return mml->v4l2_dev;
-}
-#endif
-
 struct mml_topology_cache *mml_topology_get_cache(struct mml_dev *mml)
 {
 	return IS_ERR(mml->topology) ? NULL : mml->topology;
@@ -1084,33 +1051,6 @@ s32 mml_comp_clk_disable(struct mml_comp *comp, bool dpc)
 	return 0;
 }
 
-#if 0
-struct device *mml_smmu_get_shared_device(struct device *dev, const char *name)
-{
-	struct device_node *node;
-	struct platform_device *shared_pdev;
-	struct device *shared_dev = dev;
-
-	node = of_parse_phandle(dev->of_node, name, 0);
-	if (node) {
-		shared_pdev = of_find_device_by_node(node);
-		if (shared_pdev)
-			shared_dev = &shared_pdev->dev;
-	}
-
-	return shared_dev;
-}
-#endif
-
-#if 0
-s32 mml_dpc_task_cnt_get(struct mml_task *task)
-{
-	struct mml_dev *mml = task->config->mml;
-
-	return atomic_read(&mml->dpc.task_cnt);
-}
-#endif
-
 void mml_dpc_task_cnt_inc(struct mml_task *task)
 {
 	struct mml_dev *mml = task->config->mml;
@@ -1265,14 +1205,6 @@ void mml_pw_set_kick_cb(struct mml_dev *mml,
 	mml->kick_idle_cb = kick_idle_cb;
 	mml->disp_crtc = disp_crtc;
 }
-
-#if 0
-void mml_pw_kick_idle(struct mml_dev *mml)
-{
-	if (mml->kick_idle_cb)
-		mml->kick_idle_cb(mml->disp_crtc);
-}
-#endif
 
 /* mml_calc_bw - calculate bandwidth by giving pixel and current throughput
  *
@@ -1564,43 +1496,11 @@ struct device *mml_get_mmu_dev(struct mml_dev *mml, bool secure)
 	return secure ? mml->mmu_dev_sec : mml->mmu_dev;
 }
 
-#if 0
-bool mml_dl_enable(struct mml_dev *mml)
-{
-	return mml->dl_en;
-}
-EXPORT_SYMBOL_GPL(mml_dl_enable);
-#endif
-
-#if 0
-bool mml_dpc_disable(struct mml_dev *mml)
-{
-	return mml->dpc_disable;
-}
-EXPORT_SYMBOL_GPL(mml_dpc_disable);
-#endif
-
-#if 0
-bool mml_racing_enable(struct mml_dev *mml)
-{
-	return mml->racing_en;
-}
-EXPORT_SYMBOL_GPL(mml_racing_enable);
-#endif
-
 u8 mml_max_layer(struct mml_dev *mml)
 {
 	return mml->max_layer;
 }
 EXPORT_SYMBOL_GPL(mml_max_layer);
-
-#if 0
-bool mml_tablet_ext(struct mml_dev *mml)
-{
-	return mml->tablet_ext;
-}
-EXPORT_SYMBOL_GPL(mml_tablet_ext);
-#endif
 
 u8 mml_sram_get_racing_height(struct mml_dev *mml)
 {
@@ -2028,21 +1928,6 @@ void mml_dump_set_option(struct mml_dev *mml, enum mml_sys_id sysid, enum mml_fr
 	mutex_unlock(&mml->frm_dump_mutex);
 }
 
-#if 0
-struct mml_frm_dump_data *mml_dump_read_data_lock(struct mml_dev *mml)
-{
-	mutex_lock(&mml->frm_dump_mutex);
-	return &mml->frm_dumps[mml->frm_dump_opt_sysid][mml->frm_dump_opt_bufid];
-}
-#endif
-
-#if 0
-void mml_dump_read_data_unlock(struct mml_dev *mml)
-{
-	mutex_unlock(&mml->frm_dump_mutex);
-}
-#endif
-
 void mml_dump_input(struct mml_dev *mml, enum mml_sys_id sysid, struct mml_task *task, bool force)
 {
 	const struct mml_frame_config *cfg = task->config;
@@ -2174,14 +2059,6 @@ static void mml_get_chipid(struct mml_dev *mml)
 		mml->sw_ver = chip_id->sw_ver;
 	mml_log("current sw version:%#x\n", mml->sw_ver);
 }
-
-#if 0
-u32 mml_get_chip_swver(struct mml_dev *mml)
-{
-	return mml->sw_ver;
-}
-EXPORT_SYMBOL_GPL(mml_get_chip_swver);
-#endif
 
 static void mml_process_dbg_cmd(const char *cmd, struct mml_dev *mml)
 {
