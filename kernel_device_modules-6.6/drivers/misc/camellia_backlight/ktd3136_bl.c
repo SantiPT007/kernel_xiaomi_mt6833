@@ -757,8 +757,8 @@ int ktd3137_brightness_set(int brightness)
 		mutex_unlock(&ktd_pending_lock);
 		return brightness;
 	}
-	mutex_unlock(&ktd_pending_lock);
 	ktd3137_brightness_set_workfunc(bkl_chip, brightness);
+	mutex_unlock(&ktd_pending_lock);
 	return brightness;
 }
 EXPORT_SYMBOL_GPL(ktd3137_brightness_set);
@@ -1173,12 +1173,13 @@ static int ktd3137_probe(struct i2c_client *client)
 	ktd3137_dev = ktd3137_device_create(chip, "ktd");
 	if (IS_ERR(ktd3137_dev)) {
 		dev_err(&client->dev, "failed_to create device for ktd");
+		ktd3137_dev = NULL;
 	}
 
-	err = sysfs_create_group(&ktd3137_dev->kobj, &ktd3137_bl_attr_group);
-	if (err) {
-		dev_err(&client->dev, "failed to create sysfs group\n");
-
+	if (ktd3137_dev) {
+		err = sysfs_create_group(&ktd3137_dev->kobj, &ktd3137_bl_attr_group);
+		if (err)
+			dev_err(&client->dev, "failed to create sysfs group\n");
 	}
 
 	i2c_set_clientdata(client, chip);
@@ -1214,7 +1215,9 @@ static void ktd3137_remove(struct i2c_client *client)
 {
 	struct ktd3137_chip *chip = i2c_get_clientdata(client);
 
+	mutex_lock(&ktd_pending_lock);
 	bkl_chip = NULL;
+	mutex_unlock(&ktd_pending_lock);
 	chip->bl->props.brightness = 0;
 
 	backlight_update_status(chip->bl);
@@ -1223,6 +1226,12 @@ static void ktd3137_remove(struct i2c_client *client)
 	ktd3137_hwen_pin_ctrl(chip, 0);
 
 	sysfs_remove_group(&chip->bl->dev.kobj, &ktd3137_bl_attr_group);
+	led_classdev_unregister(&chip->cdev_flash);
+	if (ktd3137_dev) {
+		sysfs_remove_group(&ktd3137_dev->kobj, &ktd3137_bl_attr_group);
+		device_unregister(ktd3137_dev);
+		ktd3137_dev = NULL;
+	}
 	gpio_free(chip->pdata->hwen_gpio);
 
 }
@@ -1262,6 +1271,9 @@ static int __init ktd3137_init(void)
 	err = i2c_add_driver(&ktd3137_driver);
 	if (err) {
 		pr_err("[ktd]ktd3137 driver failed,(errno = %d)\n", err);
+		if (ktd3137_class)
+			class_destroy(ktd3137_class);
+		ktd3137_class = NULL;
 	} else {
 		LOG_DBG("Successfully added driver %s\n",
 			ktd3137_driver.driver.name);
@@ -1272,6 +1284,8 @@ static int __init ktd3137_init(void)
 static void __exit ktd3137_exit(void)
 {
 	i2c_del_driver(&ktd3137_driver);
+	if (ktd3137_class)
+		class_destroy(ktd3137_class);
 }
 
 module_init(ktd3137_init);

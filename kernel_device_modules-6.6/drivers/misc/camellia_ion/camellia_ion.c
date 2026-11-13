@@ -149,6 +149,7 @@ enum {
 #define ION_HEAP_TYPE_FB			11
 #define ION_HEAP_TYPE_MULTIMEDIA_FOR_CAMERA	12
 #define ION_HEAP_TYPE_MULTIMEDIA_2D_FR		17
+#define CION_HEAP_ID_MM_UNCACHED		31
 #define ION_MM_DBG_NAME_LEN			48
 
 struct ion_mm_data64 {
@@ -272,7 +273,7 @@ struct cion_heap {
 static const struct cion_heap cion_heaps[] = {
 	{ "system",		ION_HEAP_TYPE_SYSTEM,		ION_HEAP_TYPE_SYSTEM },
 	{ "mtk_mm",		ION_HEAP_TYPE_MULTIMEDIA,	ION_HEAP_TYPE_MULTIMEDIA },
-	{ "mtk_mm-uncached",	ION_HEAP_TYPE_MULTIMEDIA_2D_FR,	ION_HEAP_TYPE_MULTIMEDIA },
+	{ "mtk_mm-uncached",	CION_HEAP_ID_MM_UNCACHED,	ION_HEAP_TYPE_MULTIMEDIA },
 };
 
 static const char *cion_modern_heap(u32 heap_id_mask)
@@ -325,6 +326,7 @@ struct cion_handle {
 	struct dma_buf *buf;
 	int refs;
 	int module_id;
+	bool configured;
 	struct dma_buf_attachment *att[CION_NR_DOM];
 	struct sg_table *sgt[CION_NR_DOM];
 };
@@ -413,9 +415,9 @@ static void cion_handle_destroy(struct cion_handle *h)
 	kfree(h);
 }
 
-static int cion_handle_iova(struct cion_handle *h, int module_id, dma_addr_t *iova)
+static int cion_handle_iova(struct cion_handle *h, int port, dma_addr_t *iova)
 {
-	enum cion_dom dom = cion_port_dom(module_id ? module_id : h->module_id);
+	enum cion_dom dom = cion_port_dom(port);
 	struct dma_buf_attachment *att;
 	struct sg_table *sgt;
 	struct device *dev;
@@ -522,8 +524,10 @@ static long cion_import(struct cion_client *c, struct ion_fd_data *d)
 	id = idr_for_each(&c->handles, cion_find_buf, buf);
 	if (id > 0) {
 		h = idr_find(&c->handles, id);
-		h->refs++;
 		dma_buf_put(buf);
+		if (h->refs == INT_MAX)
+			return -EOVERFLOW;
+		h->refs++;
 	} else {
 		id = cion_handle_new(c, buf);
 		if (id < 0) {
@@ -575,14 +579,17 @@ static long cion_mm(struct cion_client *c, void __user *uarg, bool compat)
 		if (!h)
 			return -EINVAL;
 		h->module_id = module_id;
+		h->configured = true;
 		return 0;
 	case ION_MM_GET_IOVA:
 	case ION_MM_GET_IOVA_EXT:
 		h = idr_find(&c->handles, handle);
 		if (!h)
 			return -EINVAL;
-		if (!h->module_id)
+		if (!h->configured) {
 			h->module_id = module_id;
+			h->configured = true;
+		}
 		ret = cion_handle_iova(h, module_id, &iova);
 		if (ret)
 			return ret;
@@ -617,7 +624,7 @@ static long cion_sys(struct cion_client *c, void __user *uarg, bool compat)
 		struct ion_sys_data64 d64;
 		struct ion_sys_data32 d32;
 	} u;
-	size_t size = compat ? sizeof(u.d32) : sizeof(u.d64);
+	size_t usz = compat ? sizeof(u.d32) : sizeof(u.d64);
 	struct cion_handle *h;
 	dma_addr_t iova;
 	s32 handle;
@@ -626,7 +633,7 @@ static long cion_sys(struct cion_client *c, void __user *uarg, bool compat)
 
 	BUILD_BUG_ON(sizeof(struct ion_sys_data32) != 96);
 	BUILD_BUG_ON(sizeof(struct ion_sys_data64) != 120);
-	if (copy_from_user(&u, uarg, size))
+	if (copy_from_user(&u, uarg, usz))
 		return -EFAULT;
 	cmd = u.d64.sys_cmd;
 
@@ -649,7 +656,7 @@ static long cion_sys(struct cion_client *c, void __user *uarg, bool compat)
 		h = idr_find(&c->handles, handle);
 		if (!h)
 			return -EINVAL;
-		ret = cion_handle_iova(h, 0, &iova);
+		ret = cion_handle_iova(h, h->configured ? h->module_id : 0, &iova);
 		if (ret)
 			return ret;
 		if (compat) {
@@ -690,7 +697,7 @@ static long cion_sys(struct cion_client *c, void __user *uarg, bool compat)
 		pr_info("camellia_ion: %s: unsupported sys cmd %u\n", c->name, cmd);
 		return -EINVAL;
 	}
-	return copy_to_user(uarg, &u, size) ? -EFAULT : 0;
+	return copy_to_user(uarg, &u, usz) ? -EFAULT : 0;
 }
 
 static long cion_custom(struct cion_client *c, u32 cmd, void __user *arg, bool compat)
@@ -817,6 +824,8 @@ static long cion_ioctl_common(struct file *file, unsigned int cmd,
 	mutex_unlock(&c->lock);
 
 	if (ret == 0 && (_IOC_DIR(cmd) & _IOC_READ) &&
+	    cmd != ION_IOC_FREE && cmd != ION_IOC_SYNC &&
+	    cmd != ION_IOC_CUSTOM && cmd != ION_IOC_CUSTOM32 &&
 	    copy_to_user(uarg, &d, _IOC_SIZE(cmd)))
 		return -EFAULT;
 	return ret;

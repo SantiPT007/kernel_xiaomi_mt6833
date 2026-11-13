@@ -1015,7 +1015,11 @@ static void fts_fwres_work(struct work_struct *work)
 void fts_fwresume_work(void)
 {
 	FTS_INFO("call.");
-	queue_work(fts_data->ts_workqueue, &fts_data->fwres_work);
+	if (!fts_entry_get())
+		return;
+	if (fwupgrade)
+		queue_work(fts_data->ts_workqueue, &fts_data->fwres_work);
+	fts_entry_put();
 }
 EXPORT_SYMBOL_GPL(fts_fwresume_work);
 
@@ -1262,6 +1266,8 @@ int fts_fwupg_exit(struct fts_ts_data *ts_data)
 {
 	FTS_FUNC_ENTER();
 	if (fwupgrade) {
+		cancel_work_sync(&ts_data->fwupg_work);
+		cancel_work_sync(&ts_data->fwres_work);
 		if (fwupgrade->fw_from_request) {
 			vfree(fwupgrade->fw);
 			fwupgrade->fw = NULL;

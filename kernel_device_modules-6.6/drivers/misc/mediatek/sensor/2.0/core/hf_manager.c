@@ -1349,6 +1349,9 @@ static ssize_t hf_manager_write(struct file *filp,
 	if (copy_from_user(&cmd, buf, count))
 		return -EFAULT;
 
+	if (cmd.action == HF_MANAGER_SENSOR_MAX_ACTION)
+		cmd.action = HF_MANAGER_SENSOR_RAWDATA;
+
 	return hf_manager_drive_device(client, &cmd);
 }
 

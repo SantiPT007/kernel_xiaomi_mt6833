@@ -5388,7 +5388,9 @@ static int load_hrt_test_data(struct drm_mtk_layering_info *disp_info,
 			}
 		} else if (strncmp(line_buf, "[test_start]", 12) == 0) {
 			tok = parse_hrt_data_value(line_buf, &test_case);
+			mutex_lock(&layering_v419_lock);
 			layering_rule_start(disp_info, 1, dev);
+			mutex_unlock(&layering_v419_lock);
 			is_test_pass = true;
 		} else if (strncmp(line_buf, "[test_end]", 10) == 0) {
 			vfree(disp_info->input_config[0]);
@@ -5678,7 +5680,9 @@ int mtk_layering_rule_ioctl(struct drm_device *dev, void *data,
 	struct drm_mtk_layering_info *disp_info_user = data;
 	int ret;
 
+	mutex_lock(&layering_v419_lock);
 	ret = layering_rule_start(disp_info_user, 0, dev);
+	mutex_unlock(&layering_v419_lock);
 	if (ret < 0)
 		DDPPR_ERR("layering_rule_start error:%d\n", ret);
 

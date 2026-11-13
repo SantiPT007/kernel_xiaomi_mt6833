@@ -33,9 +33,11 @@
 #define WL2866_LDO_EN_MASK 0x0F
 
 struct wl2866_data {
-	struct mutex lock;
 	struct i2c_client *client;
 };
+
+static DEFINE_MUTEX(wl2866_lock);
+static bool wl2866_registered;
 
 typedef enum cam_cell_id {
 	WL2866_LDO_DVDD1,
@@ -179,10 +181,9 @@ static enum IMGSENSOR_RETURN smartldo_set(
 	    sensor_idx < 0)
 		return ret;
 
+	mutex_lock(&wl2866_lock);
 	if (wl2866_data == NULL || wl2866_data->client == NULL)
-		return ret;
-	//mutex
-	mutex_lock(&wl2866_data->lock);
+		goto exit;
 	ldo_id = smartldo_get_map_ldo_id(sensor_idx, pin);
 	if (ldo_id == WL2866_LDO_NUM) {
 		printk("%s: get ldo id failed\n", __func__);
@@ -206,8 +207,7 @@ static enum IMGSENSOR_RETURN smartldo_set(
 		ret = IMGSENSOR_RETURN_SUCCESS;
 
 exit:
-	//release mutex
-	mutex_unlock(&wl2866_data->lock);
+	mutex_unlock(&wl2866_lock);
 	return ret;
 }
 
@@ -227,12 +227,18 @@ static struct i2c_driver wl2866_driver;
 enum IMGSENSOR_RETURN imgsensor_hw_smartldo_open(
 	struct IMGSENSOR_HW_DEVICE **pdevice)
 {
-	static bool registered;
-
-	if (!registered && !i2c_add_driver(&wl2866_driver))
-		registered = true;
+	if (!wl2866_registered && !i2c_add_driver(&wl2866_driver))
+		wl2866_registered = true;
 	*pdevice = &device;
 	return IMGSENSOR_RETURN_SUCCESS;
+}
+
+void imgsensor_hw_smartldo_close(void)
+{
+	if (wl2866_registered) {
+		i2c_del_driver(&wl2866_driver);
+		wl2866_registered = false;
+	}
 }
 
 
@@ -419,7 +425,6 @@ static int wl2866_probe(struct i2c_client *client)
 	printk("%s: kzalloc success", __func__);
 	/* Init real i2c_client */
 	i2c_set_clientdata(client, wl2866_data);
-	mutex_init(&wl2866_data->lock);
 
 
 	wl2866_data->client = client;
@@ -461,6 +466,14 @@ free_mem:
 	return -ENODEV;
 }
 
+static void wl2866_remove(struct i2c_client *client)
+{
+	mutex_lock(&wl2866_lock);
+	kfree(wl2866_data);
+	wl2866_data = NULL;
+	mutex_unlock(&wl2866_lock);
+}
+
 #ifdef CONFIG_OF
 static const struct of_device_id wl2866_of_match[] = {
 	{ .compatible = "mediatek,camera_smart_ldo" },
@@ -479,6 +492,7 @@ static struct i2c_driver wl2866_driver = {
 		.of_match_table = of_match_ptr(wl2866_of_match),
 	},
 	.probe = wl2866_probe,
+	.remove = wl2866_remove,
 	.id_table = wl2866_i2c_id,
 };
 
