@@ -1016,7 +1016,6 @@ static enum power_supply_property battery_props[] = {
 	POWER_SUPPLY_PROP_CAPACITY_LEVEL,
 	POWER_SUPPLY_PROP_TIME_TO_FULL_NOW,
 	POWER_SUPPLY_PROP_CHARGE_FULL_DESIGN,
-	POWER_SUPPLY_PROP_CONSTANT_CHARGE_VOLTAGE,
 };
 
 static int bm_update_psy_property(struct mtk_battery *gm, enum bm_psy_prop prop)
