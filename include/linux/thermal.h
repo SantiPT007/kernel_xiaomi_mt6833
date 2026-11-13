@@ -110,6 +110,7 @@ struct thermal_cooling_device {
 	void *stats;
 	const struct thermal_cooling_device_ops *ops;
 	bool updated; /* true if the cooling device does not need update */
+	bool clamp_cur_state;
 	struct mutex lock; /* protect thermal_instances list */
 	struct list_head thermal_instances;
 	struct list_head node;
