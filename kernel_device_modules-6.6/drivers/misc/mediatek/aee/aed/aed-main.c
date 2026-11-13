@@ -2406,5 +2406,6 @@ module_init(aed_init);
 module_exit(aed_exit);
 
 MODULE_LICENSE("GPL");
+MODULE_SOFTDEP("pre: mrdump");
 MODULE_DESCRIPTION("MediaTek AED Driver");
 MODULE_AUTHOR("MediaTek Inc.");
