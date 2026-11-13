@@ -172,3 +172,5 @@ sphinx_*/
 /rust-project.json
 
 out/
+
+/camellia/local.env
