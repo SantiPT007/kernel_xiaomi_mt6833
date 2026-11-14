@@ -102,7 +102,72 @@ static struct i2c_driver camellia_lcm_bias_driver = {
 		.of_match_table = camellia_lcm_bias_of_match,
 	},
 };
-module_i2c_driver(camellia_lcm_bias_driver);
+static const char *const camellia_lcm_ids[][2] = {
+	{ "dsi_panel_K19_36_02_0a_vdo", "incell,vendor:36,IC:0a" },
+	{ "dsi_panel_K19_36_02_0c_vdo", "incell,vendor:36,IC:0c" },
+	{ "dsi_panel_K19_43_02_0b_vdo", "incell,vendor:43,IC:0b" },
+	{ "dsi_panel_K19_36_02_0d_vdo", "incell,vendor:36,IC:0d" },
+	{ "dsi_panel_K19_43_02_0b2_vdo", "incell,vendor:43,IC:0b2" },
+};
+
+static ssize_t lcm_show(struct device *dev, struct device_attribute *attr, char *buf)
+{
+	int i;
+
+	for (i = 0; i < ARRAY_SIZE(camellia_lcm_ids); i++)
+		if (camellia_bootargs_contains(camellia_lcm_ids[i][0]))
+			return sysfs_emit(buf, "%s\n", camellia_lcm_ids[i][1]);
+	return sysfs_emit(buf, "LCM error\n");
+}
+static DEVICE_ATTR_RO(lcm);
+
+static struct attribute *hw_info_attrs[] = {
+	&dev_attr_lcm.attr,
+	NULL,
+};
+
+static const struct attribute_group hw_info_group = {
+	.name = "hw_info",
+	.attrs = hw_info_attrs,
+};
+
+static const struct attribute_group *hw_info_groups[] = {
+	&hw_info_group,
+	NULL,
+};
+
+static const struct class huaqin_class = {
+	.name = "huaqin",
+};
+
+static struct device *huaqin_dev;
+
+static int __init camellia_lcm_bias_init(void)
+{
+	if (class_register(&huaqin_class)) {
+		pr_err("[LCM] huaqin class register failed\n");
+	} else {
+		huaqin_dev = device_create_with_groups(&huaqin_class, NULL, 0, NULL,
+						       hw_info_groups, "interface");
+		if (IS_ERR(huaqin_dev)) {
+			pr_err("[LCM] hw_info create failed %ld\n", PTR_ERR(huaqin_dev));
+			huaqin_dev = NULL;
+			class_unregister(&huaqin_class);
+		}
+	}
+	return i2c_add_driver(&camellia_lcm_bias_driver);
+}
+module_init(camellia_lcm_bias_init);
+
+static void __exit camellia_lcm_bias_exit(void)
+{
+	i2c_del_driver(&camellia_lcm_bias_driver);
+	if (huaqin_dev) {
+		device_unregister(huaqin_dev);
+		class_unregister(&huaqin_class);
+	}
+}
+module_exit(camellia_lcm_bias_exit);
 
 MODULE_DESCRIPTION("camellia LCD bias I2C regulator");
 MODULE_LICENSE("GPL");
