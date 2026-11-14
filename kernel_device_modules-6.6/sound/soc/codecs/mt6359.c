@@ -5498,6 +5498,10 @@ static int mt6359_codec_init_reg(struct snd_soc_component *cmpnt)
 			   RG_AUDLOLSCDISABLE_VAUDP32_MASK_SFT,
 			   0x1 << RG_AUDLOLSCDISABLE_VAUDP32_SFT);
 
+	regmap_update_bits(priv->regmap, MT6359_AUD_TOP_CKPDN_CON0,
+			   RG_VOW13M_CK_PDN_MASK_SFT,
+			   RG_VOW13M_CK_PDN_MASK_SFT);
+
 	/* Set HP_EINT trigger level to 2.0v */
 	regmap_update_bits(priv->regmap, MT6359_AUDENC_ANA_CON19,
 			   RG_EINTCOMPVTH_MASK_SFT,
