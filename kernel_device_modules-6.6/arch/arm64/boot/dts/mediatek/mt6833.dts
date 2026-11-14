@@ -245,6 +245,7 @@
 		#size-cells = <0>;
 
 		cpu0: cpu@000 {
+			#cooling-cells = <2>;
 			device_type = "cpu";
 			compatible = "arm,cortex-a55";
 			reg = <0x0000>;
@@ -258,6 +259,7 @@
 		};
 
 		cpu1: cpu@001 {
+			#cooling-cells = <2>;
 			device_type = "cpu";
 			compatible = "arm,cortex-a55";
 			reg = <0x0100>;
@@ -271,6 +273,7 @@
 		};
 
 		cpu2: cpu@002 {
+			#cooling-cells = <2>;
 			device_type = "cpu";
 			compatible = "arm,cortex-a55";
 			reg = <0x0200>;
@@ -284,6 +287,7 @@
 		};
 
 		cpu3: cpu@003 {
+			#cooling-cells = <2>;
 			device_type = "cpu";
 			compatible = "arm,cortex-a55";
 			reg = <0x0300>;
@@ -297,6 +301,7 @@
 		};
 
 		cpu4: cpu@004 {
+			#cooling-cells = <2>;
 			device_type = "cpu";
 			compatible = "arm,cortex-a55";
 			reg = <0x0400>;
@@ -310,6 +315,7 @@
 		};
 
 		cpu5: cpu@005 {
+			#cooling-cells = <2>;
 			device_type = "cpu";
 			compatible = "arm,cortex-a55";
 			reg = <0x0500>;
@@ -323,6 +329,7 @@
 		};
 
 		cpu6: cpu@100 {
+			#cooling-cells = <2>;
 			device_type = "cpu";
 			compatible = "arm,cortex-a76";
 			reg = <0x0600>;
@@ -336,6 +343,7 @@
 		};
 
 		cpu7: cpu@101 {
+			#cooling-cells = <2>;
 			device_type = "cpu";
 			compatible = "arm,cortex-a76";
 			reg = <0x0700>;

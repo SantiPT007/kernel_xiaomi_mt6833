@@ -17,6 +17,7 @@
 #include <linux/energy_model.h>
 #include <linux/err.h>
 #include <linux/export.h>
+#include <linux/idr.h>
 #include <linux/pm_opp.h>
 #include <linux/pm_qos.h>
 #include <linux/slab.h>
@@ -78,7 +79,10 @@ struct cpufreq_cooling_device {
 	struct time_in_idle *idle_time;
 #endif
 	struct freq_qos_request qos_req;
+	int id;
 };
+
+static DEFINE_IDA(cpufreq_ida);
 
 #ifdef CONFIG_THERMAL_GOV_POWER_ALLOCATOR
 /**
@@ -593,20 +597,29 @@ __cpufreq_cooling_register(struct device_node *np,
 		goto free_idle_time;
 	}
 
-	cdev = ERR_PTR(-ENOMEM);
-	name = kasprintf(GFP_KERNEL, "cpufreq-%s", dev_name(dev));
-	if (!name)
+	ret = ida_alloc(&cpufreq_ida, GFP_KERNEL);
+	if (ret < 0) {
+		cdev = ERR_PTR(ret);
 		goto remove_qos_req;
+	}
+	cpufreq_cdev->id = ret;
+
+	cdev = ERR_PTR(-ENOMEM);
+	name = kasprintf(GFP_KERNEL, "thermal-cpufreq-%d", cpufreq_cdev->id);
+	if (!name)
+		goto remove_ida;
 
 	cdev = thermal_of_cooling_device_register(np, name, cpufreq_cdev,
 						  cooling_ops);
 	kfree(name);
 
 	if (IS_ERR(cdev))
-		goto remove_qos_req;
+		goto remove_ida;
 
 	return cdev;
 
+remove_ida:
+	ida_free(&cpufreq_ida, cpufreq_cdev->id);
 remove_qos_req:
 	freq_qos_remove_request(&cpufreq_cdev->qos_req);
 free_idle_time:
@@ -695,6 +708,7 @@ void cpufreq_cooling_unregister(struct thermal_cooling_device *cdev)
 
 	thermal_cooling_device_unregister(cdev);
 	freq_qos_remove_request(&cpufreq_cdev->qos_req);
+	ida_free(&cpufreq_ida, cpufreq_cdev->id);
 	free_idle_time(cpufreq_cdev);
 	kfree(cpufreq_cdev);
 }

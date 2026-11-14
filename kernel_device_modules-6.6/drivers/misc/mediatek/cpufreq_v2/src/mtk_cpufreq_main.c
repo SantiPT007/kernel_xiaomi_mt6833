@@ -1391,9 +1391,10 @@ static struct freq_attr *_mt_cpufreq_attr[] = {
 
 static struct cpufreq_driver _mt_cpufreq_driver = {
 #ifdef GOV_PER_POLICY
-	.flags = CPUFREQ_ASYNC_NOTIFICATION | CPUFREQ_NEED_UPDATE_LIMITS | CPUFREQ_HAVE_GOVERNOR_PER_POLICY,
+	.flags = CPUFREQ_ASYNC_NOTIFICATION | CPUFREQ_NEED_UPDATE_LIMITS | CPUFREQ_HAVE_GOVERNOR_PER_POLICY |
+		 CPUFREQ_IS_COOLING_DEV,
 #else
-	.flags = CPUFREQ_ASYNC_NOTIFICATION | CPUFREQ_NEED_UPDATE_LIMITS,
+	.flags = CPUFREQ_ASYNC_NOTIFICATION | CPUFREQ_NEED_UPDATE_LIMITS | CPUFREQ_IS_COOLING_DEV,
 #endif
 	.verify = _mt_cpufreq_verify,
 	.target = _mt_cpufreq_target,
