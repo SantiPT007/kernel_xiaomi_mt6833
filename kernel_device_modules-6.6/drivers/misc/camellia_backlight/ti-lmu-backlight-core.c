@@ -472,7 +472,8 @@ static int ti_lmu_backlight_of_get_ctrl_bank(struct device_node *np,
 	int num_channels = lmu_bl->chip->cfg->num_channels;
 	int ret, num_sources;
 
-	sources = devm_kzalloc(lmu_bl->chip->dev, num_channels, GFP_KERNEL);
+	sources = devm_kcalloc(lmu_bl->chip->dev, num_channels, sizeof(*sources),
+			       GFP_KERNEL);
 	if (!sources)
 		return -ENOMEM;
 
@@ -492,8 +493,11 @@ static int ti_lmu_backlight_of_get_ctrl_bank(struct device_node *np,
 		return ret;
 
 	lmu_bl->led_sources = 0;
-	while (num_sources--)
+	while (num_sources--) {
+		if (sources[num_sources] >= num_channels)
+			return -EINVAL;
 		set_bit(sources[num_sources], &lmu_bl->led_sources);
+	}
 
 	return 0;
 }
